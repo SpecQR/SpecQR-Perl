@@ -1,0 +1,107 @@
+#!/usr/bin/env perl
+use 5.026;
+use strict;
+use warnings;
+use FindBin qw($RealBin);
+use lib "$RealBin/../lib";
+use Encode ();
+use JSON::PP ();
+use Scalar::Util qw(blessed);
+use SpecQR qw(:qr :render :structured_append);
+use SpecQR::Error qw(fail require_range);
+use SpecQR::Segments qw(MAX_PAYLOAD_UNITS strict_text);
+my $HELP=<<'HELP';
+SpecQR Perl 0.1.0
+Usage: specqr (--text TEXT | --text-file FILE | --bytes-file FILE) [options]
+  --format svg|png|svg-data-url|png-data-url|matrix|json (default svg)
+  --output FILE             Write to FILE rather than stdout
+  --ecc L|M|Q|H             Error correction (default M)
+  --version 1..40           Fixed version; otherwise automatic
+  --min-version N --max-version N --mask 0..7
+  --mode auto|numeric|alphanumeric|byte|kanji
+  --eci N --gs1 --fnc1 --fnc1-second A --boost --no-optimize --no-kanji
+  --margin N --scale N      Quiet zone and pixels/module (defaults 4 and 8)
+  --foreground COLOR --background COLOR --print-dpi N
+  --plan                   Arithmetic-only planning JSON
+  --structured-append      A 2..16-symbol JSON set; requires --format json
+  --max-symbols N          Maximum Structured Append symbols
+  --help --version-info
+Text arguments/files must be shortest-form UTF-8; bytes files remain opaque.
+Use --text-file - or --bytes-file - for standard input. Outputs use binary I/O.
+HELP
+sub integer {
+    my($s,$label)=@_; fail('INVALID_INPUT',"$label must be an integer") unless $s =~ /\A[+-]?[0-9]{1,10}\z/;
+    return 0+$s;
+}
+sub decoded {
+    my($s)=@_; return $s if utf8::is_utf8($s) && (strict_text($s)||1);
+    my $text=eval {Encode::decode('UTF-8',$s,Encode::FB_CROAK|Encode::LEAVE_SRC)};
+    fail('INVALID_INPUT','Text must be shortest-form UTF-8 containing Unicode scalars') if $@;
+    strict_text($text); return $text;
+}
+sub bounded_read {
+    my($path,$binary)=@_; my $limit=($binary?1:4)*MAX_PAYLOAD_UNITS; my $fh;
+    if($path eq '-') { $fh=\*STDIN; binmode(STDIN,':raw') or fail('IO_ERROR',"Cannot read standard input: $!"); }
+    else { open($fh,'<:raw',$path) or fail('IO_ERROR',"Cannot open input: $!"); }
+    my $data='';
+    while(1) { my $remaining=$limit+1-length($data); my $want=$remaining<8192?$remaining:8192; my $got=read($fh,my $chunk,$want); fail('IO_ERROR',"Cannot read input: $!") unless defined $got; last if $got==0; $data.=$chunk; fail('DATA_TOO_LONG','Input file exceeds resource budget') if length($data)>$limit; }
+    close($fh) or fail('IO_ERROR',"Cannot close input: $!") if $path ne '-';
+    return $data;
+}
+sub q_json { my($q)=@_; return {version=>$q->{version},errorCorrectionLevel=>$q->{errorCorrectionLevel},maskPattern=>$q->{maskPattern},matrix=>[map {join('',map {$_?'1':'0'} @$_)} @{$q->{matrix}}],diagnostics=>$q->{diagnostics}}; }
+sub write_stdout {
+    my($output)=@_;
+    binmode(STDOUT,':raw') or fail('IO_ERROR',"Cannot set output mode: $!");
+    print STDOUT $output or fail('IO_ERROR',"Cannot write output: $!");
+    close(STDOUT) or fail('IO_ERROR',"Cannot finish output: $!");
+}
+sub main {
+    my(@args)=@ARGV; my(%o,$source,$input,$target); my $format='svg'; my($planning,$sa,$maximum)=(0,0,16);
+    my %int=( '--version'=>'version','--min-version'=>'minVersion','--max-version'=>'maxVersion','--mask'=>'maskPattern','--eci'=>'eciAssignment','--margin'=>'margin','--scale'=>'scale' );
+    my %string=( '--ecc'=>'errorCorrectionLevel','--mode'=>'mode','--fnc1-second'=>'fnc1Second','--foreground'=>'foreground','--background'=>'background' );
+    my %flags=( '--gs1'=>['gs1',1],'--fnc1'=>['fnc1',1],'--no-optimize'=>['optimizeSegments',0],'--no-kanji'=>['allowKanji',0],'--boost'=>['boostErrorCorrection',1] );
+    while(@args) {
+        my $arg=shift @args;
+        if($arg eq '--help'||$arg eq '-h') { write_stdout($HELP); return; }
+        if($arg eq '--version-info') { write_stdout("SpecQR Perl $SpecQR::VERSION; Perl $^V\n"); return; }
+        if($arg eq '--plan') {$planning=1;next} if($arg eq '--structured-append') {$sa=1;next}
+        if(exists $flags{$arg}) { $o{$flags{$arg}[0]}=$flags{$arg}[1];next }
+        fail('INVALID_INPUT',"Unknown option: $arg") unless exists($int{$arg})||exists($string{$arg})||grep {$arg eq $_} qw(--text --text-file --bytes-file --output -o --format --print-dpi --max-symbols);
+        fail('INVALID_INPUT',"Missing value for $arg") unless @args; my $value=shift @args;
+        if($arg eq '--text'||$arg eq '--text-file'||$arg eq '--bytes-file') { fail('INVALID_INPUT','Specify exactly one input source') if defined $source; ($source,$input)=($arg,$value); }
+        elsif($arg eq '--output'||$arg eq '-o') {$target=$value}
+        elsif($arg eq '--format') {$format=$value}
+        elsif($arg eq '--max-symbols') {$maximum=integer($value,$arg)}
+        elsif($arg eq '--print-dpi') { fail('INVALID_INPUT','DPI must be numeric') unless $value =~ /\A[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]{1,4})?\z/; $o{printDpi}=0+$value; }
+        elsif(exists $int{$arg}) {
+            my $n=integer($value,$arg);
+            require_range($n,1,40,'Version','INVALID_VERSION') if $arg eq '--version';
+            require_range($n,0,7,'Mask') if $arg eq '--mask';
+            require_range($n,0,999999,'ECI','INVALID_ECI') if $arg eq '--eci';
+            $o{$int{$arg}}=$n;
+        }
+        else {$o{$string{$arg}}=decoded($value)}
+    }
+    fail('INVALID_INPUT','An explicit text or byte input source is required') unless defined $source;
+    fail('INVALID_OUTPUT','Unsupported output format') unless grep {$format eq $_} qw(svg png svg-data-url png-data-url matrix json);
+    fail('INVALID_MODE','Planning and Structured Append are separate operations') if $planning&&$sa;
+    fail('INVALID_OUTPUT','Structured Append requires --format json') if $sa&&$format ne 'json';
+    $input=bounded_read($input,$source eq '--bytes-file') if $source ne '--text';
+    $input=$source eq '--bytes-file'?[unpack('C*',$input)]:decoded($input);
+    my $json=JSON::PP->new->utf8->canonical->allow_nonref; my $output;
+    if($planning) { my $p=plan($input,\%o); $output=$json->encode({map {$_=>$p->{$_}} qw(ok version capacityVersion dataBitLength capacityBits remainingBits diagnostics)})."\n"; }
+    elsif($sa) { my $set=generate_structured_append($input,\%o,$maximum); $output=$json->encode({%$set,symbols=>[map {q_json($_)} @{$set->{symbols}}]})."\n"; }
+    else {
+        my $q=generate($input,\%o);
+        if($format eq 'svg') {$output=to_svg($q)."\n"}
+        elsif($format eq 'png') {$output=to_png($q)}
+        elsif($format eq 'svg-data-url') {$output=to_svg_data_url($q)."\n"}
+        elsif($format eq 'png-data-url') {$output=to_png_data_url($q)."\n"}
+        elsif($format eq 'matrix') {$output=$json->encode(q_json($q)->{matrix})."\n"}
+        else {$output=$json->encode(q_json($q))."\n"}
+    }
+    if(defined $target) { open(my $out,'>:raw',$target) or fail('IO_ERROR',"Cannot open output: $!"); print $out $output or fail('IO_ERROR',"Cannot write output: $!"); close($out) or fail('IO_ERROR',"Cannot close output: $!"); }
+    else { write_stdout($output); }
+}
+my $ok=eval {main();1};
+if(!$ok) { my $e=$@; my $message=blessed($e)&&$e->isa('SpecQR::Error')?$e->{code}.': '.$e->{message}:'IO_ERROR: '.$e; $message =~ s/[\r\n]+\z//; print STDERR "$message\n"; exit 2; }

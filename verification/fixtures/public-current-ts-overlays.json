@@ -1,0 +1,274 @@
+{
+  "schema": 1,
+  "oracleRepository": "https://github.com/SpecQR/SpecQR",
+  "oracleCommit": "16efc6c0a8e397c9df3d051d20fce6c1eebdfad7",
+  "nodeVersion": "v24.19.0",
+  "fixtureSha256": "f1649de0f2e62c87fa7b369cdd1f99bd7c092b6a1a2fa52e2e0caf5aea136f82",
+  "fixtureRecords": 5610,
+  "selectedRecords": 12,
+  "changedRecords": 8,
+  "unchangedRecords": 5602,
+  "sourceSha256": {
+    "src/browser.d.ts": "8e3f6e297863ff72839a6ee0a2d66ed24a3a2842418197c2da47e031934d2271",
+    "src/browser.js": "c7f1609850d0f614bb6b06c844805327c31064f4c8cc6a899a248a54751b200e",
+    "src/core/codewords.js": "e06d096eb1ade1f118a9627c419503f289027d2044428309204600d2bd74ed19",
+    "src/core/galois-field.js": "2928b5520268b0a795c1a4e14fac460f0dd37ef89a4366e10b1ac49aa3494631",
+    "src/core/mask.js": "5df22969324cfc45bf6be7a768b09fae91e741582abfafd021422cc0eaa4fb34",
+    "src/core/matrix.js": "afdf61b811f10041df6cbb4e6a9bb9f55b4a70c66152564131545457cb84ba50",
+    "src/core/reed-solomon.js": "65dccf4baa39df55d4eb828418bb3bd0b00d3e7fb3520bff27b569c5010657b2",
+    "src/core/tables.js": "3c53e40f238cb2db2fd5eba20dc70dbcb0d327925123f81dddbde7981785fb37",
+    "src/diagnostics.js": "ff17e1fa76cf35cb8c8feadd50cbc2531e4f81557be9cac3febbdec4e81865fa",
+    "src/encoding/bit-buffer.js": "7acc219a39d44ff62082996ba94268a5bb2cf1e65cd2ff53d157e169e920a111",
+    "src/encoding/control-segments.js": "fa3de4161e4d3ce44ea00f98070b424b6d0a03e76c34f87ec8fd057abcab5993",
+    "src/encoding/modes.js": "204a3a4df0a81b1e8decc63299cd099812ee4708882feb4ccb47f97ae68333e4",
+    "src/encoding/shift-jis.js": "beb66ee39a3ac7a8890ea7a1e256b2e0552b2d7e821153ad68d4b40c6daa7def",
+    "src/errors.js": "96d8a46d1e0da904847dcc9e32bd3498dcfc7b72924fd1d1dd528a64c6b57c70",
+    "src/gs1/ai-dictionary.js": "c483742e13e98f08bc461b4223502be9542e7043bc02031af3bb31a3def93099",
+    "src/gs1/ai.js": "482f443c5b485173038ebea945a5c7d524efce87e2cd9c5595361494ceccea95",
+    "src/gs1/check-digit.js": "5a3fafa1ef032d5a2603c094f34563026d577b6b926b7ffefaef36fc00ec93ce",
+    "src/gs1/digital-link.js": "a4ea3059c7fa63fc5c099fa5bc1915e59cbfd8f103fe19120397787c49b5eb7a",
+    "src/gs1/element-string.js": "441beb66197dd872186314a619b3cf8a04ad9956fef70e618a03d0b7bfe835cd",
+    "src/gs1/index.js": "0b3d54b9dc1d1dd0343ba77b8e6c7e7e07bca96353fd42a5c98c8e0052947c8d",
+    "src/gs1/parser.js": "5572e92815a5f3c3bb7aad67fabcfd0b2aa34085d12c7baef0a1cee123bcf9ef",
+    "src/gs1/validation.js": "44e1321ab549f4d050816305b0a201e6d4396418dfe1c9d0de6675d6d6fc1368",
+    "src/gs1/validator.js": "3482cab601f09d9b7dde94198c0f886c843c7d7f4018541388cc388fc993d64a",
+    "src/gs1.js": "8caa34a2eb6acfb24d5c46f8559fbd0a96dc0109d69a1789fbe74203a2290833",
+    "src/index.d.ts": "418c434c76c08cbad5433fc9966819613887d4dceaa2acdec51dee5390f7df7c",
+    "src/index.js": "a5d4e05df7aed06e780aec2e7ca4ce7d43753d7a8126df86d9c2252d995d8700",
+    "src/internal/build.js": "441ba0487937f7ed08a35af504ce5a656f2fff9598c4273ff44c783d1650b7c5",
+    "src/internal/bytes.js": "21638be346eb2a892b8e49989826fd00ef78ba9ac9fb5b88f946005aec92eb52",
+    "src/internal/diagnostics-adapter.js": "f9878949f37b4d879d9e7231ddc1bab1c25204237a84fc5618de5ef4b0c715c8",
+    "src/internal/generation.js": "47ba84f45479c967aa0cc79c3a2fee028823306490e26d1541f822ccaadf4a06",
+    "src/internal/planning.js": "372de0a9779f6c583dd0f5b03b485bdb481bb7d1fb5567159d3fd37cafb2b9ab",
+    "src/internal/render-result.js": "0b46ff36777d61bea9dc3ad40d57ab6f14ea16c80839f9ce1ca10cdaea65a5cb",
+    "src/internal/structured-append.js": "2128eb6a7489f6da88a49d0188bafefc718daa1b33e537d50e362215d75ba109",
+    "src/node.d.ts": "449fc5f716a41df882b0bf90784377120dfb47b19bb1bff8265745915718e201",
+    "src/node.js": "091c94d0e17f520d203c34db9b728107fdc70874113fd8827cf8a0a393e91719",
+    "src/options.js": "97a3e2d5b2e5a59edc979767738c77c107ce6addbb2d2779e473abaeb5a1a872",
+    "src/render/base64.js": "4667a73ceb0aeed9dc098be49bedfb5b9e6ff143ebb3da98b766bc78ffba5baf",
+    "src/render/canvas.js": "08a1df715ca48040fc3ba1215a8e6d0c2c4da36367b283ce3f73b015cda9c39c",
+    "src/render/color.js": "bbe42c3a7e98c17bff21970cb57065a1ba75820f394e2debea91f1018800a1f1",
+    "src/render/geometry.js": "5441d2c4c0af385ffee8d1db709666aecde5343e5f25a84de6c149122444b88a",
+    "src/render/png.js": "d94d469f5911aad56be7d5d6152acc2a2d5366017cd7d1385fd19bec53fb6959",
+    "src/render/svg.js": "2b8043f641e78e9172f8b8ea52e40764026f8347f5d9d0481380517ccc272649",
+    "src/structured-append.js": "6e29f677321ba8875acf3da557a5976a856fc1760e2d46038af7fbb23a9163ff"
+  },
+  "deltas": [
+    {
+      "index": 2696,
+      "request": {
+        "text": "10ABC%DEF",
+        "options": {
+          "gs1": true,
+          "optimizeSegments": true
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "540931304142432544454600ec11ec11",
+        "codewords": "540931304142432544454600ec11ec1192e56608c0880d8e14b8",
+        "matrixHash": "e4cb22cc3f35496af6fa4f2e313d6d3429bb0a40ae5db4ba3f1644c17a0f9bf6"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 0,
+        "data": "520502d39a90b5da8500ec11ec11ec11",
+        "codewords": "520502d39a90b5da8500ec11ec11ec118c7ef8f153ac84ec689f",
+        "matrixHash": "dd06e15f3efa15bf55e9cb18c00676cd45ee43bdfc9764cf0589de06244f094c"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2697,
+      "request": {
+        "text": "10ABC%%DEF",
+        "options": {
+          "gs1": true,
+          "optimizeSegments": true
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "540a3130414243252544454600ec11ec",
+        "codewords": "540a3130414243252544454600ec11eceaa8b5701b7d0cf992cf",
+        "matrixHash": "946735c6fdf5cedf3a919647d6f4d6d49fe86a6c4f30110c2011f7cffe2b2463"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 2,
+        "data": "520602d39a90b6a6bb50a0ec11ec11ec",
+        "codewords": "520602d39a90b6a6bb50a0ec11ec11ec3468bc1ca4217cc756ac",
+        "matrixHash": "dd6ce6c9e8b8e9cf789b4ae14f68c1fc575954d7a0ab731c0f95e5fdbc1767c7"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2699,
+      "request": {
+        "text": "10ABC%DEF",
+        "options": {
+          "gs1": true,
+          "optimizeSegments": false
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "540931304142432544454600ec11ec11",
+        "codewords": "540931304142432544454600ec11ec1192e56608c0880d8e14b8",
+        "matrixHash": "e4cb22cc3f35496af6fa4f2e313d6d3429bb0a40ae5db4ba3f1644c17a0f9bf6"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 0,
+        "data": "520502d39a90b5da8500ec11ec11ec11",
+        "codewords": "520502d39a90b5da8500ec11ec11ec118c7ef8f153ac84ec689f",
+        "matrixHash": "dd06e15f3efa15bf55e9cb18c00676cd45ee43bdfc9764cf0589de06244f094c"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2700,
+      "request": {
+        "text": "10ABC%%DEF",
+        "options": {
+          "gs1": true,
+          "optimizeSegments": false
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "540a3130414243252544454600ec11ec",
+        "codewords": "540a3130414243252544454600ec11eceaa8b5701b7d0cf992cf",
+        "matrixHash": "946735c6fdf5cedf3a919647d6f4d6d49fe86a6c4f30110c2011f7cffe2b2463"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 2,
+        "data": "520602d39a90b6a6bb50a0ec11ec11ec",
+        "codewords": "520602d39a90b6a6bb50a0ec11ec11ec3468bc1ca4217cc756ac",
+        "matrixHash": "dd6ce6c9e8b8e9cf789b4ae14f68c1fc575954d7a0ab731c0f95e5fdbc1767c7"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2702,
+      "request": {
+        "text": "10ABC%DEF",
+        "options": {
+          "fnc1Second": "A",
+          "optimizeSegments": true
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 5,
+        "data": "9a540931304142432544454600ec11ec",
+        "codewords": "9a540931304142432544454600ec11ec5d5e15aa0b8ef3fc9655",
+        "matrixHash": "5800a82f59713c681726abf6553909dcb5804ee7c1ffdaae3233cce999705fa2"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a520502d39a90b5da8500ec11ec11ec",
+        "codewords": "9a520502d39a90b5da8500ec11ec11ec20562e7a7e29be61279d",
+        "matrixHash": "ab87d101834a2d082c076194befc7e28500746679c5a06284bb8e113e1498cc2"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2703,
+      "request": {
+        "text": "10ABC%%DEF",
+        "options": {
+          "fnc1Second": "A",
+          "optimizeSegments": true
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a540a3130414243252544454600ec11",
+        "codewords": "9a540a3130414243252544454600ec11e710e697a1ad9f23bab3",
+        "matrixHash": "5f478d93b9b0d35dd2696b0f18ad41c84d95751c849fbb06f3d967f4db35d976"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a520602d39a90b6a6bb50a0ec11ec11",
+        "codewords": "9a520602d39a90b6a6bb50a0ec11ec1120f0115886d96631fd22",
+        "matrixHash": "18225078d914bae0f15a45ecac71bd054e83928c3c7e9477cddcd497d431d1e9"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2705,
+      "request": {
+        "text": "10ABC%DEF",
+        "options": {
+          "fnc1Second": "A",
+          "optimizeSegments": false
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 5,
+        "data": "9a540931304142432544454600ec11ec",
+        "codewords": "9a540931304142432544454600ec11ec5d5e15aa0b8ef3fc9655",
+        "matrixHash": "5800a82f59713c681726abf6553909dcb5804ee7c1ffdaae3233cce999705fa2"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a520502d39a90b5da8500ec11ec11ec",
+        "codewords": "9a520502d39a90b5da8500ec11ec11ec20562e7a7e29be61279d",
+        "matrixHash": "ab87d101834a2d082c076194befc7e28500746679c5a06284bb8e113e1498cc2"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    },
+    {
+      "index": 2706,
+      "request": {
+        "text": "10ABC%%DEF",
+        "options": {
+          "fnc1Second": "A",
+          "optimizeSegments": false
+        }
+      },
+      "historicalExpected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a540a3130414243252544454600ec11",
+        "codewords": "9a540a3130414243252544454600ec11e710e697a1ad9f23bab3",
+        "matrixHash": "5f478d93b9b0d35dd2696b0f18ad41c84d95751c849fbb06f3d967f4db35d976"
+      },
+      "expected": {
+        "version": 1,
+        "ecc": "M",
+        "mask": 4,
+        "data": "9a520602d39a90b6a6bb50a0ec11ec11",
+        "codewords": "9a520602d39a90b6a6bb50a0ec11ec1120f0115886d96631fd22",
+        "matrixHash": "18225078d914bae0f15a45ecac71bd054e83928c3c7e9477cddcd497d431d1e9"
+      },
+      "reason": "Current TypeScript high-level FNC1 literal-percent escaping and bit comparison replaces historical whole-byte fallback."
+    }
+  ]
+}

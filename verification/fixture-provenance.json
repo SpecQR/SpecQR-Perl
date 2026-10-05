@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "immediateSource": {
+    "repository": "https://github.com/SpecQR/SpecQR-Nim",
+    "commit": "4f9154664d35a24cecb30b75cfdba0a9f16ced3e"
+  },
+  "fixtureSource": {
+    "repository": "https://github.com/SpecQR/SpecQR-Julia",
+    "commit": "ffb95d10cd1c585421cb3a52a43a9e657d000a29"
+  },
+  "copiedByteForByte": {
+    "strict-authority-vectors.json": "7095233243f44eee485bfdad7a67845321b4aa041c87238ca68854788aba298c",
+    "internal-reference.jsonl.gz": "140eec7223af96822572f87cf67a80b612619bde250db552c1cad83b603ae67e",
+    "public-reference.jsonl.gz": "f1649de0f2e62c87fa7b369cdd1f99bd7c092b6a1a2fa52e2e0caf5aea136f82",
+    "cross-port-regressions.json": "0b32b6d0d345e954533bbe29a43537c4a055f31898a158c08a2d2d631b7eda59",
+    "expected-contract-vectors.json": "d08eb74343ac0fd17b2840c5c34e651569b3e90deaf924296faf228514486dff",
+    "manifest.json": "a95182675f85f2c3bb805b05ca1931fb4fa425e3ee72c14b047f9af138877799"
+  },
+  "gs1HistoricalFixture": {
+    "source": "https://github.com/SpecQR/SpecQR-Python",
+    "path": "tests/fixtures/gs1-upstream.json",
+    "embeddedUpstreamCommit": "15ad15e5c770ea0e39072f8f88b2733018f02ffd",
+    "cases": 1411,
+    "sha256": "e12c7a2e6ed9ae26cc9865caab9e6e0a7dbeb62438a903a3f5611d6420c865e2",
+    "historicalPythonDeltasAreNotPerlExpectations": true,
+    "immediateSourceCommit": "69bc9d3257f7e86d5b07328437f4da9f95b4c843"
+  }
+}

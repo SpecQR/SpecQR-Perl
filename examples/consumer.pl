@@ -1,0 +1,13 @@
+use strict; use warnings; use utf8;
+use SpecQR qw(generate to_svg to_png plan get_capacity numeric new_segment generate_segments create_gs1_element_string generate_structured_append merge_structured_append_parts);
+my $q=generate('Hello, SpecQR 漢字',{eciAssignment=>26});
+die 'matrix' unless @{$q->{matrix}}==4*$q->{version}+17;
+die 'svg' unless to_svg($q)=~/^<svg /;
+die 'png' unless substr(to_png($q),0,8) eq "\x89PNG\r\n\x1a\n";
+die 'plan' unless plan('12345')->{ok};
+die 'capacity' unless get_capacity(1,'L','numeric')->{maximum}==41;
+die 'manual' unless generate_segments([numeric('123'),new_segment('byte','hello')])->{version}==1;
+die 'gs1' unless create_gs1_element_string([{ai=>'01',value=>'09506000134352'}]) eq '0109506000134352';
+my $sa=generate_structured_append('x'x100,{version=>1,errorCorrectionLevel=>'L'});
+die 'sa' unless $sa->{total}>=2;
+print "consumer passed\n";

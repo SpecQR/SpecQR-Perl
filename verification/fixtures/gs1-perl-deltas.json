@@ -1,0 +1,5462 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "15ad15e5c770ea0e39072f8f88b2733018f02ffd",
+  "baselineSha256": "e12c7a2e6ed9ae26cc9865caab9e6e0a7dbeb62438a903a3f5611d6420c865e2",
+  "oracleRepository": "https://github.com/SpecQR/SpecQR-Nim",
+  "oracleCommit": "4f9154664d35a24cecb30b75cfdba0a9f16ced3e",
+  "oracleSource": "src/specqr/gs1.nim",
+  "oracleSourceSha256": "9df6a11927f265108e4d01e3321a208e1bcd4f9c484ff6aad5f9b8bd42734fa3",
+  "oracleHarness": "verification/gs1/nim_oracle.nim",
+  "oracleToolchain": "Nim 2.2.12 Linux amd64, C backend",
+  "contractComparison": "Public values and all catalog fields; diagnostics code/reason/count. Omit optional null fields, length.isVariable, empty success errors, and diagnostic wording. The local native tests separately assert those Perl metadata fields.",
+  "historicalCases": 1411,
+  "unchangedContracts": 1159,
+  "differenceCount": 252,
+  "bucketCounts": {
+    "empty-field-length": 50,
+    "validation-option-reason": 27,
+    "digital-link-context-primary": 2,
+    "missing-primary-placement": 18,
+    "malformed-path-reason": 8,
+    "strict-percent-unicode": 27,
+    "strict-fragment": 11,
+    "strict-absolute-uri": 10,
+    "strict-authority": 80,
+    "strict-base-query": 4,
+    "dot-builder-data-preservation": 2,
+    "ipv6-text-preservation": 3,
+    "strict-raw-whitespace": 6,
+    "dot-path-data-rejection": 4
+  },
+  "differences": [
+    {
+      "caseId": 149,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 00 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "00",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 159,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 01 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "01",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 169,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 02 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "02",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 179,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 10 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "10",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 189,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 11 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "11",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 199,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 12 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "12",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 209,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 13 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "13",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 219,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 15 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "15",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 229,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 16 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "16",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 239,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 17 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "17",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 249,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 20 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "20",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 259,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 21 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "21",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 269,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 22 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "22",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 279,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 30 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "30",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 289,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 37 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "37",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 299,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 240 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "240",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 309,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 241 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "241",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 319,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 400 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "400",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 329,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 410 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "410",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 339,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 411 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "411",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 349,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 412 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "412",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 359,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 413 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "413",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 369,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 414 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "414",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 379,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 415 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "415",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 389,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 420 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "420",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 399,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 422 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "422",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 409,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 424 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "424",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 419,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 425 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "425",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 429,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 426 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "426",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 439,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3100 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3100",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 449,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3101 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3101",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 459,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3102 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3102",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 469,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3103 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3103",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 479,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3104 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3104",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 489,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3105 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3105",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 499,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3200 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3200",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 509,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3201 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3201",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 519,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3202 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3202",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 529,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3203 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3203",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 539,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3204 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3204",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 549,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 3205 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "3205",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 559,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 91 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "91",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 569,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 92 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "92",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 579,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 93 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "93",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 589,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 94 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "94",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 599,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 95 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "95",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 609,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 96 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "96",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 619,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 97 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "97",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 629,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 98 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "98",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 639,
+      "operation": "validateElements",
+      "bucket": "empty-field-length",
+      "reason": "Nim reports an empty GS1 value as invalid-length rather than generic invalid-input.",
+      "expected": {
+        "ok": false,
+        "elements": null,
+        "hasSeparators": null,
+        "errors": [
+          {
+            "code": "GS1_INVALID_LENGTH",
+            "message": "GS1 AI 99 value must not be empty",
+            "reason": "invalid-length",
+            "ai": "99",
+            "value": "",
+            "key": null,
+            "offset": null,
+            "elementIndex": 0,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": 649,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 654,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 659,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 664,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 669,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 674,
+      "operation": "validateElements",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 686,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 690,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 694,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 698,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 702,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 706,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 710,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 714,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 718,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 722,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 726,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 730,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 734,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 738,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 741,
+      "operation": "validateRaw",
+      "bucket": "digital-link-context-primary",
+      "reason": "Nim applies the requested digital-link validation context to raw element strings and requires a supported primary AI.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link requires primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": false
+      }
+    },
+    {
+      "caseId": 742,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 746,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 750,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 754,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 758,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 761,
+      "operation": "validateRaw",
+      "bucket": "digital-link-context-primary",
+      "reason": "Nim applies the requested digital-link validation context to raw element strings and requires a supported primary AI.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link requires primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": false
+      }
+    },
+    {
+      "caseId": 762,
+      "operation": "validateRaw",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation allowUnsupportedAi must be false",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "elements": null,
+        "hasSeparators": null
+      }
+    },
+    {
+      "caseId": 768,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 777,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 786,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 795,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 804,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 813,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 822,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 831,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 838,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path segment 3 must be a GS1 AI",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 839,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path segment 3 must be a GS1 AI",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 840,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 847,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must contain AI/value pairs",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 848,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must contain AI/value pairs",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 849,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 867,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 874,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 875,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 876,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 880,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 883,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 884,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 885,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 886,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 889,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 912,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 925,
+      "operation": "linkParse",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 926,
+      "operation": "linkParse",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 928,
+      "operation": "linkValidate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED",
+            "message": "GS1 Digital Link URI must not include a fragment",
+            "reason": "fragment-not-allowed",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 929,
+      "operation": "linkValidate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED",
+            "message": "GS1 Digital Link URI must not include a fragment",
+            "reason": "fragment-not-allowed",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 930,
+      "operation": "linkValidate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED",
+            "message": "GS1 Digital Link URI must not include a fragment",
+            "reason": "fragment-not-allowed",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 931,
+      "operation": "linkNormalize",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 932,
+      "operation": "linkNormalize",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 939,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 948,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 957,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 966,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 975,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 982,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must not contain empty segments",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 983,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must not contain empty segments",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 984,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must not contain empty segments",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1002,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1033,
+      "operation": "linkParse",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1034,
+      "operation": "linkParse",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1036,
+      "operation": "linkValidate",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be an absolute http or https URL",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1037,
+      "operation": "linkValidate",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be an absolute http or https URL",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1038,
+      "operation": "linkValidate",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be an absolute http or https URL",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1039,
+      "operation": "linkNormalize",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1040,
+      "operation": "linkNormalize",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1047,
+      "operation": "linkValidate",
+      "bucket": "missing-primary-placement",
+      "reason": "Nim diagnoses a missing selected path primary as invalid-digital-link-placement, rather than generic malformed-path.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path must include primary AI 00, 01, or 414",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1051,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1052,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1054,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1055,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1056,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1057,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1058,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1060,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1061,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1063,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1064,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1065,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1066,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1067,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1097,
+      "operation": "linkCreate",
+      "bucket": "strict-base-query",
+      "reason": "Nim rejects every base URL query component, including an empty query delimiter.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link baseUrl must not include query components",
+          "detailCode": "GS1_INVALID_INPUT"
+        }
+      }
+    },
+    {
+      "caseId": 1098,
+      "operation": "linkCreate",
+      "bucket": "strict-base-query",
+      "reason": "Nim rejects every base URL query component, including an empty query delimiter.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link baseUrl must not include query components",
+          "detailCode": "GS1_INVALID_INPUT"
+        }
+      }
+    },
+    {
+      "caseId": 1099,
+      "operation": "linkCreate",
+      "bucket": "strict-base-query",
+      "reason": "Nim rejects every base URL query component, including an empty query delimiter.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link baseUrl must not include query components",
+          "detailCode": "GS1_INVALID_INPUT"
+        }
+      }
+    },
+    {
+      "caseId": 1100,
+      "operation": "linkCreate",
+      "bucket": "strict-base-query",
+      "reason": "Nim rejects every base URL query component, including an empty query delimiter.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link baseUrl must not include query components",
+          "detailCode": "GS1_INVALID_INPUT"
+        }
+      }
+    },
+    {
+      "caseId": 1104,
+      "operation": "linkCreate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 1105,
+      "operation": "linkCreate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 1106,
+      "operation": "linkCreate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 1107,
+      "operation": "linkCreate",
+      "bucket": "strict-fragment",
+      "reason": "Nim rejects any fragment delimiter, including an empty fragment, instead of dropping or retaining it.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link URI must not include a fragment",
+          "detailCode": "GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED"
+        }
+      }
+    },
+    {
+      "caseId": 1155,
+      "operation": "linkCreate",
+      "bucket": "dot-builder-data-preservation",
+      "reason": "Nim safely moves dot-only qualifier values to query; the historical TypeScript fixture allowed URL normalization to remove payload.",
+      "expected": "https://example.com/stem/01/04912345678904?10=."
+    },
+    {
+      "caseId": 1157,
+      "operation": "linkCreate",
+      "bucket": "dot-builder-data-preservation",
+      "reason": "Nim safely moves dot-only qualifier values to query; the historical TypeScript fixture allowed URL normalization to remove payload.",
+      "expected": "https://example.com/stem/01/04912345678904?10=.."
+    },
+    {
+      "caseId": 1173,
+      "operation": "linkValidate",
+      "bucket": "validation-option-reason",
+      "reason": "Nim preserves the GS1_INVALID_INPUT category and uses invalid-input rather than TypeScript invalid-options/unsupported-option reason labels.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 validation normalize is unsupported; call normalizeGs1DigitalLink",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1181,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1182,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1183,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1184,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1185,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1186,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1187,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1188,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1189,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1190,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1191,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1192,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1201,
+      "operation": "linkNormalize",
+      "bucket": "ipv6-text-preservation",
+      "reason": "Nim lowercases IPv6 text but does not canonicalize zero compression or convert an embedded dotted IPv4 tail to hexadecimal.",
+      "expected": "https://[0:0:0:0:0:0:0:1]/01/04912345678904"
+    },
+    {
+      "caseId": 1204,
+      "operation": "linkNormalize",
+      "bucket": "ipv6-text-preservation",
+      "reason": "Nim lowercases IPv6 text but does not canonicalize zero compression or convert an embedded dotted IPv4 tail to hexadecimal.",
+      "expected": "https://[2001:0db8:0:0:1:0:0:1]/01/04912345678904"
+    },
+    {
+      "caseId": 1205,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1206,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1207,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1217,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1218,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1219,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1223,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1224,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1225,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1226,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1227,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1228,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1229,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1230,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1231,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1232,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1233,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1234,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1235,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1236,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1237,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1238,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1239,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1240,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1242,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1245,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1248,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1251,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1253,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1254,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1255,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1257,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1260,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1262,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1263,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1264,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1265,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1266,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1267,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1269,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1272,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1279,
+      "operation": "linkNormalize",
+      "bucket": "ipv6-text-preservation",
+      "reason": "Nim lowercases IPv6 text but does not canonicalize zero compression or convert an embedded dotted IPv4 tail to hexadecimal.",
+      "expected": "https://[::ffff:192.168.1.1]/01/04912345678904"
+    },
+    {
+      "caseId": 1281,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1284,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1287,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1290,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1292,
+      "operation": "linkParse",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1293,
+      "operation": "linkValidate",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1294,
+      "operation": "linkNormalize",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1298,
+      "operation": "linkParse",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1299,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1300,
+      "operation": "linkNormalize",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+          "detailCode": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST"
+        }
+      }
+    },
+    {
+      "caseId": 1301,
+      "operation": "linkParse",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1302,
+      "operation": "linkValidate",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be an absolute http or https URL",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1303,
+      "operation": "linkNormalize",
+      "bucket": "strict-absolute-uri",
+      "reason": "Nim requires the explicit http:// or https:// delimiter and rejects browser-style scheme repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be an absolute http or https URL",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1317,
+      "operation": "linkValidate",
+      "bucket": "malformed-path-reason",
+      "reason": "Nim reports malformed path shapes as invalid-input rather than a separate malformed-path reason label.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_INPUT",
+            "message": "GS1 Digital Link path must not contain empty segments",
+            "reason": "invalid-input",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1319,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1320,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1321,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1322,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1323,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1324,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1325,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1326,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1327,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1331,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1332,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1333,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1334,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1335,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1336,
+      "operation": "linkNormalize",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1349,
+      "operation": "linkParse",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1350,
+      "operation": "linkValidate",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_INVALID_URI",
+            "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+            "reason": "invalid-uri",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1351,
+      "operation": "linkNormalize",
+      "bucket": "strict-raw-whitespace",
+      "reason": "Nim rejects raw whitespace/control characters and backslashes rather than applying browser URL repairs.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must be absolute http or https without whitespace or backslashes",
+          "detailCode": "GS1_DIGITAL_LINK_INVALID_URI"
+        }
+      }
+    },
+    {
+      "caseId": 1352,
+      "operation": "linkParse",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+          "detailCode": "GS1_INVALID_PERCENT_ENCODING"
+        }
+      }
+    },
+    {
+      "caseId": 1359,
+      "operation": "linkValidate",
+      "bucket": "strict-percent-unicode",
+      "reason": "Nim strictly rejects malformed percent escapes, malformed UTF-8 and decoded NUL in every URI component before parsing GS1 values.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_PERCENT_ENCODING",
+            "message": "GS1 URI must use valid percent-encoding and UTF-8 without NUL",
+            "reason": "invalid-percent-encoding",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1374,
+      "operation": "linkValidate",
+      "bucket": "dot-path-data-rejection",
+      "reason": "Nim rejects literal and encoded dot-only GS1 path segments before normalization can remove payload.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1376,
+      "operation": "linkParse",
+      "bucket": "dot-path-data-rejection",
+      "reason": "Nim rejects literal and encoded dot-only GS1 path segments before normalization can remove payload.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+          "detailCode": "GS1_INVALID_DIGITAL_LINK_PLACEMENT"
+        }
+      }
+    },
+    {
+      "caseId": 1377,
+      "operation": "linkValidate",
+      "bucket": "dot-path-data-rejection",
+      "reason": "Nim rejects literal and encoded dot-only GS1 path segments before normalization can remove payload.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+            "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+            "reason": "invalid-digital-link-placement",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": null,
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1378,
+      "operation": "linkNormalize",
+      "bucket": "dot-path-data-rejection",
+      "reason": "Nim rejects literal and encoded dot-only GS1 path segments before normalization can remove payload.",
+      "expected": {
+        "throws": {
+          "code": "INVALID_GS1",
+          "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+          "detailCode": "GS1_INVALID_DIGITAL_LINK_PLACEMENT"
+        }
+      }
+    },
+    {
+      "caseId": 1380,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1384,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1388,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1392,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1396,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    },
+    {
+      "caseId": 1400,
+      "operation": "linkValidate",
+      "bucket": "strict-authority",
+      "reason": "Nim requires ASCII DNS/canonical IPv4/RFC IPv6 without credentials, percent hosts, IDNA conversion, browser IPv4 aliases, or malformed authority.",
+      "expected": {
+        "ok": false,
+        "errors": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNSUPPORTED_HOST",
+            "message": "Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials",
+            "reason": "unsupported-host",
+            "ai": null,
+            "value": null,
+            "key": null,
+            "offset": null,
+            "elementIndex": null,
+            "expected": "ASCII DNS name, canonical dotted IPv4, or RFC IPv6",
+            "count": null
+          }
+        ],
+        "warnings": [],
+        "result": null
+      }
+    }
+  ],
+  "currentTsAudit": {
+    "repository": "https://github.com/SpecQR/SpecQR",
+    "commit": "16efc6c0a8e397c9df3d051d20fce6c1eebdfad7",
+    "oracleToolchain": "Node.js v24.19.0",
+    "source": "src/gs1/digital-link.js",
+    "sourceSha256": "a4ea3059c7fa63fc5c099fa5bc1915e59cbfd8f103fe19120397787c49b5eb7a",
+    "oracleHarness": "verification/gs1/current_ts_oracle.mjs",
+    "changedHistoricalCaseCount": 6,
+    "changes": [
+      {
+        "caseId": 1155,
+        "expected": {
+          "throws": {
+            "code": "INVALID_GS1",
+            "message": "GS1 Digital Link path values must not be dot segments; use pathAis: [] to place these values in the query"
+          }
+        }
+      },
+      {
+        "caseId": 1157,
+        "expected": {
+          "throws": {
+            "code": "INVALID_GS1",
+            "message": "GS1 Digital Link path values must not be dot segments; use pathAis: [] to place these values in the query"
+          }
+        }
+      },
+      {
+        "caseId": 1374,
+        "expected": {
+          "ok": false,
+          "errors": [
+            {
+              "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+              "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+              "reason": "invalid-digital-link-placement"
+            }
+          ],
+          "warnings": []
+        }
+      },
+      {
+        "caseId": 1376,
+        "expected": {
+          "throws": {
+            "code": "INVALID_GS1",
+            "message": "GS1 Digital Link path values must not be dot segments; place these values in the query"
+          }
+        }
+      },
+      {
+        "caseId": 1377,
+        "expected": {
+          "ok": false,
+          "errors": [
+            {
+              "code": "GS1_INVALID_DIGITAL_LINK_PLACEMENT",
+              "message": "GS1 Digital Link path values must not be dot segments; place these values in the query",
+              "reason": "invalid-digital-link-placement"
+            }
+          ],
+          "warnings": []
+        }
+      },
+      {
+        "caseId": 1378,
+        "expected": {
+          "throws": {
+            "code": "INVALID_GS1",
+            "message": "GS1 Digital Link path values must not be dot segments; place these values in the query"
+          }
+        }
+      }
+    ],
+    "alignedPerlContractCount": 1163,
+    "differenceCount": 248
+  }
+}
