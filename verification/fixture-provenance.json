@@ -24,5 +24,24 @@
     "sha256": "e12c7a2e6ed9ae26cc9865caab9e6e0a7dbeb62438a903a3f5611d6420c865e2",
     "historicalPythonDeltasAreNotPerlExpectations": true,
     "immediateSourceCommit": "69bc9d3257f7e86d5b07328437f4da9f95b4c843"
+  },
+  "gs1UrlRestoration": {
+    "sourceRepository": "https://github.com/SpecQR/SpecQR-GDScript",
+    "sourceCommit": "f0fb4a41d69a847418764bfc1459065bc11684f3",
+    "currentTsCommit": "16efc6c0a8e397c9df3d051d20fce6c1eebdfad7",
+    "restorationTargets": 80,
+    "historicalRequests": 1411,
+    "intentionalResiduals": 168,
+    "sharedOperations": 49,
+    "extraCurrentTsPositiveOperations": 139,
+    "fixtures": {
+      "url-compatibility-extra.json": "ce84a1261b5d5d25143f240c67d0d2efb4fd32d053360ae3230c604c7d32cd14",
+      "native-shared-gs1-deltas3.json": "dd5a7dd6efeba47d490c895ae39b9a985dc045bc6f111ce601b29b37c7094f89",
+      "native-intentional-deltas168.json": "332e993479fcb898e04469230d77540412c7513c673e21e0511b0f7f19dc6055",
+      "current-ts-gs1-shared49.json": "a7d568cb2a63ff28695b132c1028c8d7ca898cca0e813316ff6b454fecc447e1",
+      "approved-restorations80.json": "08f1e5ae4b2d49163e85ed95507090f4b409924e4ce1d553f092a4efa5ddcd3c",
+      "current-ts-gs1-1411.json.gz": "c2e0678be740d935306353ae15c0e5f80a444a641351b070f5126be81057021b",
+      "diagnostic-migrations5.json": "e4ed5e221cb5297551cbf75cb6131c149b54a53a3d111eb94f4d8438f14685e7"
+    }
   }
 }

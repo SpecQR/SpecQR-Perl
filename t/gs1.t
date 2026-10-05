@@ -4,6 +4,7 @@ use warnings;
 use utf8;
 use Test::More;
 use JSON::PP ();
+use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
 use Encode ();
 use Digest::SHA qw(sha256_hex);
 use FindBin;
@@ -24,6 +25,12 @@ sub fails {
 sub read_json {
     my ($name)=@_; open my $fh,'<:raw',"$FindBin::Bin/../verification/fixtures/$name" or die "$name: $!";
     local $/; return JSON::PP::decode_json(<$fh>);
+}
+sub read_current_ts {
+    my $path="$FindBin::Bin/../verification/fixtures/current-ts-gs1-1411.json.gz";
+    open my $fh,'<:raw',$path or die $!;local $/;my $raw=<$fh>;
+    is(sha256_hex($raw),'c2e0678be740d935306353ae15c0e5f80a444a641351b070f5126be81057021b','current TS artifact is pinned');
+    my $out;gunzip \$raw => \$out or die $GunzipError;return JSON::PP::decode_json($out);
 }
 # Cross-language comparison checks payload, every catalog field, diagnostic
 # categories/reasons and warning counts. Human wording and Nim's always-present
@@ -235,32 +242,74 @@ subtest 'strict authority profile and pinned cross-port vectors' => sub {
     }
     is(normalize_gs1_digital_link("HTTP://LOCALHOST:080/01/$gtin"),"http://localhost/01/$gtin");
     is(validate_gs1_digital_link("http://localhost/01/$gtin")->{warnings}[0]{code},'GS1_DIGITAL_LINK_HTTP');
-    for my $host ('0x','0X','1.0x','example.0x','0x.','1.0X','1.2.3.0x','0x7f000001','0177.0.0.1','127.1','2130706433','127.0.0.01','1.2.3.256','1.2.3.4.','example.123','example.0xff','user:password@example.com','user@example.com','例.jp','%65xample.com','a..example','-bad.example','bad-.example','bad_name.example','','[::1%25eth0]','[1:2:3:4:5:6:7]','[1:2:3:4:5:6:7:8:9]','[:::]','[1::2::3]','[::ffff:192.000.2.1]','[1.2.3.4::]','[::1]oops') {
+    for my $host ('example.0x','1.2.3.256','example.123','example.0xff','例.jp','','[::1%25eth0]','[1:2:3:4:5:6:7]','[1:2:3:4:5:6:7:8:9]','[:::]','[1::2::3]','[::ffff:192.000.2.1]','[1.2.3.4::]','[::1]oops') {
         my $u="https://$host/01/$gtin";
-        fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {parse_gs1_digital_link($u)},"reject host ".join('',map { ord($_)>127 ? sprintf("\\u{%x}",ord($_)) : $_ } split //,$host));
+        fails($host eq ''?'GS1_INVALID_DIGITAL_LINK_PLACEMENT':'GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {parse_gs1_digital_link($u)},"reject host ".join('',map { ord($_)>127 ? sprintf("\\u{%x}",ord($_)) : $_ } split //,$host));
         ok(!validate_gs1_digital_link($u)->{ok});
     }
-    for my $v (@{read_json('strict-authority-vectors.json')->{vectors}}) {
-        fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {parse_gs1_digital_link($v->{input})},$v->{id});
-        fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {normalize_gs1_digital_link($v->{input})});
-        is(validate_gs1_digital_link($v->{input})->{ok},$v->{strictProfileExpected}{validateOk});
+    my $shared=read_json('current-ts-gs1-shared49.json');my $shared_delta=read_json('native-shared-gs1-deltas3.json');
+    my %shared_override=map {$_->{id}=>$_->{expected}} @{$shared_delta->{cases}};
+    is(scalar @{$shared->{cases}},49,'all original shared GS1 operations retained');
+    for my $row (@{$shared->{cases}}) {
+        is_deeply(contract(evaluate($row->{request})),contract($shared_override{$row->{id}}//$row->{expected}),$row->{id});
     }
-    for my $port ('','-1','+443','65536','123456','a','443:80') { fails('GS1_DIGITAL_LINK_INVALID_URI',sub {parse_gs1_digital_link("https://example.com:$port/01/$gtin")}); }
+    open my $extra_bytes,'<:raw',"$FindBin::Bin/../verification/fixtures/url-compatibility-extra.json" or die $!;
+    {local $/;is(sha256_hex(<$extra_bytes>),'ce84a1261b5d5d25143f240c67d0d2efb4fd32d053360ae3230c604c7d32cd14','independent extra URL targets are pinned');}
+    my $extra=read_json('url-compatibility-extra.json');
+    for my $row (@{$extra->{cases}}) {is_deeply(contract(evaluate($row->{request})),contract($row->{expected}),$row->{id});}
+    for my $port ('-1','+443','65536','123456','a','443:80') { fails('GS1_DIGITAL_LINK_INVALID_URI',sub {parse_gs1_digital_link("https://example.com:$port/01/$gtin")}); }
     is(normalize_gs1_digital_link("https://example.com:00443/01/$gtin"),$uri);
     is(normalize_gs1_digital_link("https://example.com:00000/01/$gtin"),"https://example.com:0/01/$gtin");
     is(normalize_gs1_digital_link("https://example.com:65535/01/$gtin"),"https://example.com:65535/01/$gtin");
-    for my $s ("$uri#x","$uri#") { fails('GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED',sub {parse_gs1_digital_link($s)}); }
-    for my $s ("ftp://example.com/01/$gtin","//example.com/01/$gtin","https://example.com\\x/01/$gtin"," $uri","$uri?x=raw space","HTTPſ://example.com/01/$gtin") {
+    for my $s ("$uri#x") { fails('GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED',sub {parse_gs1_digital_link($s)}); }
+    for my $s ("ftp://example.com/01/$gtin","//example.com/01/$gtin","HTTPſ://example.com/01/$gtin") {
         fails('GS1_DIGITAL_LINK_INVALID_URI',sub {parse_gs1_digital_link($s)});
     }
 };
-subtest 'all 1411 pinned upstream fixtures with independent Nim profile deltas' => sub {
+subtest 'URL restoration retains strict security and data boundaries' => sub {
+    for my $host ('4294967296','0x100000000','040000000000','1.16777216','1.2.65536','1.2.3.256','08','09','0xg.1','1.2.3.4.5','%2F','%3A','%40','%5B','%5C','%25','[:::]','[::ffff:192.000.2.1]',('9'x1000),('0x'.('f'x900))) {
+        my $u="https://$host/01/$gtin";
+        fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {parse_gs1_digital_link($u)});
+        fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {normalize_gs1_digital_link($u)});
+        ok(!validate_gs1_digital_link($u)->{ok});
+    }
+    for my $port ('65536',('9'x900)) {fails('GS1_DIGITAL_LINK_INVALID_URI',sub {parse_gs1_digital_link("https://example.com:$port/01/$gtin")});}
+    for my $bad ('%','%0','%GG','%C0%AF','%ED%A0%80','%F4%90%80%80','%FF','%00','%E2%82') {
+        for my $u ("https://$bad/01/$gtin","https://$bad\@example.com/01/$gtin","$uri/10/$bad","$uri?x=$bad") {
+            fails('GS1_INVALID_PERCENT_ENCODING',sub {parse_gs1_digital_link($u)});
+            ok(!validate_gs1_digital_link($u)->{ok});
+        }
+    }
+    fails('GS1_INVALID_PERCENT_ENCODING',sub {parse_gs1_digital_link("$uri?x=\x00")});
+    for my $host ('例.jp','bücher.example','%C3%BC.example') {fails('GS1_DIGITAL_LINK_UNSUPPORTED_HOST',sub {parse_gs1_digital_link("https://$host/01/$gtin")});}
+    my $private='do-not-leak-user:do-not-leak-secret';
+    my $result=validate_gs1_digital_link("https://$private\@example.com/01/bad");
+    ok(!$result->{ok});unlike(JSON::PP->new->encode($result->{errors}),qr/do-not-leak/,'errors never disclose userinfo');
+    for my $context ('.','..','%2e','%2e%2e') {
+        for my $u ("https://example.com/01/$context/../01/$gtin","$uri/10/$context") {
+            fails('GS1_INVALID_DIGITAL_LINK_PLACEMENT',sub {parse_gs1_digital_link($u)});
+            fails('GS1_INVALID_DIGITAL_LINK_PLACEMENT',sub {normalize_gs1_digital_link($u)});
+        }
+    }
+};
+subtest 'all 1411 historical inputs with independent current compatibility mappings' => sub {
     my $data=read_json('gs1-upstream.json');my $deltas=read_json('gs1-perl-deltas.json');
     is($data->{upstreamCommit},'15ad15e5c770ea0e39072f8f88b2733018f02ffd');is(scalar @{$data->{cases}},1411);
     is($deltas->{oracleCommit},'4f9154664d35a24cecb30b75cfdba0a9f16ced3e');
     is(scalar @{$deltas->{differences}},252,'explicit independently verified profile and diagnostic differences');
     my %overrides=map {$_->{caseId}=>$_->{expected}} @{$deltas->{differences}};
     is(scalar(keys %overrides),252,'unique explicit delta case IDs');
+    my $restored=read_json('approved-restorations80.json');my $migrated=read_json('diagnostic-migrations5.json');
+    is(scalar @{$restored->{cases}},80,'80 independently pinned TypeScript positives');
+    is(scalar @{$migrated->{cases}},5,'five explicitly mapped diagnostic precedences');
+    for my $row (@{$restored->{cases}},@{$migrated->{cases}}) {
+        my $f=$data->{cases}[$row->{caseId}];my %request=map {$_=>$f->{$_}} grep {$_ ne 'expected'} keys %$f;
+        is_deeply($row->{request},\%request,'unchanged migrated historical input');
+        $overrides{$row->{caseId}}=$row->{expected};
+    }
+    my $current_full=read_current_ts();
+    for my $row (@{$restored->{cases}}) {is_deeply($row->{expected},$current_full->{cases}[$row->{caseId}]{expected},'positive expectation comes from TS');}
+
     open my $fixture_bytes,'<:raw',"$FindBin::Bin/../verification/fixtures/gs1-upstream.json" or die $!;
     { local $/; is(sha256_hex(<$fixture_bytes>),$deltas->{baselineSha256},'unchanged historical corpus digest'); }
     my $different=0;
@@ -283,6 +332,6 @@ subtest 'all 1411 pinned upstream fixtures with independent Nim profile deltas' 
         ++$delta_count if $json->encode(contract($upstream)) ne $json->encode(contract($oracle));
         is_deeply(contract(evaluate($f)),contract($oracle),"current TS fixture $id $f->{op} with explicit Nim profile");
     }
-    is($delta_count,248,'exact current TS diagnostic/profile difference count');
+    is($delta_count,168,'exact remaining current TS diagnostic/profile difference count');
 };
 done_testing;

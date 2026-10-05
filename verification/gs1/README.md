@@ -43,12 +43,15 @@ TypeScript changes. The historical fixture file is unchanged and its SHA-256 is
 gated by the test. Detailed current URL and diagnostics differences are public
 in `docs/gs1.md`.
 
-Results:
+Current restoration results (Perl 5.42.3 and 5.44.0):
 
-- Nim reference versus Perl: 1,411/1,411 contracts equal.
-- Historical TypeScript versus Perl: 1,159 equal, 252 explicit profile/diagnostic differences.
-- Current TypeScript versus Perl: 1,163 equal, 248 explicit profile/diagnostic differences.
+- Original published baseline versus current TS: 1,163 equal, 248 differences.
+- Restored candidate versus current TS: 1,243 equal, 168 differences.
+- All 80 restoration targets equal exact TypeScript expectations.
+- Remaining categories: 132 diagnostic-only, 34 strict rejections, two safe-dot builder outputs.
+- All 49 original shared operations and 139 extra positive operations are explicitly tested.
 
-The two TypeScript counts do not claim failures in supported ordinary GS1 data.
-They expose the exact conservative URI, diagnostic, and current data-safety
-contract boundaries rather than claiming full browser URL equivalence.
+The historical 252-difference ledger remains unchanged as historical evidence.
+The current expectations and exact assertion mapping are described in
+`docs/gs1.md` and `docs/url-compatibility-mapping.md`. Full UTS46 is not part of
+Perl core; raw non-ASCII hosts remain a stated dependency-free scope limit.

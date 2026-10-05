@@ -45,6 +45,13 @@ sub _run {
   my $inter=SpecQR::Core::interleave_codewords(\@b,$v,$e);my $q=SpecQR::Core::build_matrix($inter->{codewords},$v,$e,$mask);
   return {data=>hex_bytes(\@b),codewords=>hex_bytes($inter->{codewords}),matrix=>rows($q->{matrix}),matrixPacked=>packed($q->{matrix}),mask=>$q->{maskPattern},penalty=>$q->{penalty},penalties=>[map {$_->{penalty}} @{$q->{maskPenalties}}]};
  }
+ if($command eq 'gs1-fixture') {
+  my %ops=(dictionary=>'get_supported_gs1_ais',info=>'get_gs1_ai_info',checkDigit=>'calculate_gs1_check_digit',validateCheckDigit=>'validate_gs1_check_digit',gtinDigit=>'calculate_gtin_check_digit',gtinAppend=>'append_gtin_check_digit',gtinValidate=>'validate_gtin_check_digit',ssccDigit=>'calculate_sscc_check_digit',ssccAppend=>'append_sscc_check_digit',ssccValidate=>'validate_sscc_check_digit',human=>'parse_gs1_human_readable',raw=>'parse_gs1_element_string',create=>'create_gs1_element_string',validateElements=>'validate_gs1_elements',validateRaw=>'validate_gs1_element_string',linkCreate=>'create_gs1_digital_link',linkParse=>'parse_gs1_digital_link',linkValidate=>'validate_gs1_digital_link',linkNormalize=>'normalize_gs1_digital_link');
+  my $fn=$ops{$r->{op}} or bad('Unknown GS1 fixture operation');
+  my $v=eval {no strict 'refs'; &{"SpecQR::GS1::$fn"}(exists($r->{elements})?$r->{elements}:$r->{input},$r->{options})}; my $e=$@;
+  if($e) {die $e unless blessed($e) && $e->isa('SpecQR::Error');$v={throws=>{code=>$e->{code},message=>$e->{message}}};}
+  return {value=>$v};
+ }
  if($command eq 'gs1-build'){return {value=>SpecQR::GS1::create_gs1_element_string($r->{elements})}}
  if($command eq 'digital-link-build'){return {value=>SpecQR::GS1::create_gs1_digital_link($r->{elements},$r->{linkOptions}//{})}}
  if($command eq 'digital-link-parse'){return SpecQR::GS1::parse_gs1_digital_link($r->{url})}

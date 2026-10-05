@@ -24,6 +24,7 @@ def main():
   gs1_fixture=ROOT/'verification/fixtures/gs1-upstream.json';gs1_delta=ROOT/'verification/fixtures/gs1-perl-deltas.json';gs1=strict_json(gs1_fixture.read_bytes());require(len(gs1['cases'])==1411,'GS1 fixture count mismatch');report['gs1Fixtures']={'records':1411,'historicalFixture':binding(gs1_fixture),'currentSourceCorrections':binding(gs1_delta)}
   run([a.perl,'-I'+str(ROOT/'lib'),'-MTest::Harness','-e','runtests(@ARGV)',*tests],'native-unit',stderr_empty=True)
   bridge=ROOT/'script/bridge.pl';runtime=strict_json(run([a.perl,bridge,'--runtime'],'bridge-runtime',stderr_empty=True));require(runtime['perl']==a.expect_version and runtime['os']=='linux' and runtime['wordSize']==64,'Unexpected native Perl runtime');report['bridgeRuntime']=runtime
+  run([sys.executable,ROOT/'script/verify_gs1.py','--binary',bridge,'--output',a.output/'gs1-current.json'],'gs1-current',stderr_empty=True)
   for suite in ['public','internal']:
    print('Running '+suite+' reference corpus',flush=True);run([sys.executable,ROOT/'script/verify_reference.py','--binary',bridge,'--suite',suite,'--timeout','7200','--output',a.output/(suite+'-reference.json')],suite+'-reference',stderr_empty=True)
   run([sys.executable,ROOT/'script/verify_negative.py','--binary',bridge,'--output',a.output/'negative.json'],'negative',stderr_empty=True)

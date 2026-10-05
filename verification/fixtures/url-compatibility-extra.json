@@ -1,0 +1,3235 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "https://github.com/SpecQR/SpecQR",
+    "commit": "16efc6c0a8e397c9df3d051d20fce6c1eebdfad7",
+    "tree": "ca4c2360a7dc0950c1bfd1f76e44616bcd406023",
+    "toolchain": "Node.js v24.19.0",
+    "oracleHarness": "verification/gs1/current_ts_oracle.mjs",
+    "oracleHarnessSha256": "cf4b5b393a909bbae33cee250420d9997cff742fd1607c1746e91e6a4ff02b33",
+    "sourceHashes": {
+      "src/gs1/ai-dictionary.js": "c483742e13e98f08bc461b4223502be9542e7043bc02031af3bb31a3def93099",
+      "src/gs1/ai.js": "482f443c5b485173038ebea945a5c7d524efce87e2cd9c5595361494ceccea95",
+      "src/gs1/check-digit.js": "5a3fafa1ef032d5a2603c094f34563026d577b6b926b7ffefaef36fc00ec93ce",
+      "src/gs1/digital-link.js": "a4ea3059c7fa63fc5c099fa5bc1915e59cbfd8f103fe19120397787c49b5eb7a",
+      "src/gs1/element-string.js": "441beb66197dd872186314a619b3cf8a04ad9956fef70e618a03d0b7bfe835cd",
+      "src/gs1/index.js": "0b3d54b9dc1d1dd0343ba77b8e6c7e7e07bca96353fd42a5c98c8e0052947c8d",
+      "src/gs1/parser.js": "5572e92815a5f3c3bb7aad67fabcfd0b2aa34085d12c7baef0a1cee123bcf9ef",
+      "src/gs1/validation.js": "44e1321ab549f4d050816305b0a201e6d4396418dfe1c9d0de6675d6d6fc1368",
+      "src/gs1/validator.js": "3482cab601f09d9b7dde94198c0f886c843c7d7f4018541388cc388fc993d64a",
+      "src/gs1.js": "8caa34a2eb6acfb24d5c46f8559fbd0a96dc0109d69a1789fbe74203a2290833"
+    },
+    "rawOracleOutputSha256": "a8e72d0298518785ac83517f7f2260081c4ebb807e0545b7a582b41f67957a6a"
+  },
+  "caseCount": 139,
+  "cases": [
+    {
+      "id": "legacy-host-0:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0x/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "8b0d790984702b55d8056bbe9d992409bdc58a9a3fbe5068c76320714ec0cb26"
+    },
+    {
+      "id": "legacy-host-0:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0x/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "4771437ad06bbd7de59db94e96834e03e49fbfc25b7634722029b0ccc0c02913"
+    },
+    {
+      "id": "legacy-host-0:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0x/01/09506000134352"
+      },
+      "expected": "https://0.0.0.0/01/09506000134352",
+      "requestSha256": "9bd96627c51c5588b03a8318334ff5147083d2022347f873bff3965d31e96be4"
+    },
+    {
+      "id": "legacy-host-1:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0X/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "67023868520d46ee371af3c4336c666e9bd662de21e438db2c64ffe9329cf88f"
+    },
+    {
+      "id": "legacy-host-1:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0X/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "75d230b8e5e6159a25609b815a4e7e61dddb9871f2dd2455f42383466d198942"
+    },
+    {
+      "id": "legacy-host-1:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0X/01/09506000134352"
+      },
+      "expected": "https://0.0.0.0/01/09506000134352",
+      "requestSha256": "ab7be93af17c399698d61c762a6ed7b006fe84c5f7dfb6ff330f7ed6c4cf40d8"
+    },
+    {
+      "id": "legacy-host-2:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.0x/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "321ef6ead04e5e3ecfc300eceb4f68de8b6edb22d4b0059150c753116994a2f2"
+    },
+    {
+      "id": "legacy-host-2:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.0x/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "e37e7c5e2a86fc9221afbe512976c20b26167f32ea7c17a091f75b1280b8782b"
+    },
+    {
+      "id": "legacy-host-2:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.0x/01/09506000134352"
+      },
+      "expected": "https://1.0.0.0/01/09506000134352",
+      "requestSha256": "b10e9c42d4282ed102ccae0115457c66b556f5eee13913dd6b55a17c8f2904ab"
+    },
+    {
+      "id": "legacy-host-4:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0x./01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "228ad441fde4f32dae0d3d61386a6b883570cf1300157b0497ce7a9cfa19edac"
+    },
+    {
+      "id": "legacy-host-4:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0x./01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "07cc95620afa33c6120df50debf23d519d4ec99ac4132d5077bd1bf951bea1ef"
+    },
+    {
+      "id": "legacy-host-4:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0x./01/09506000134352"
+      },
+      "expected": "https://0.0.0.0/01/09506000134352",
+      "requestSha256": "ee7f161d0067e0df5be4304c6ef3570fd56b37a42f7d2bc735364b35e573fca1"
+    },
+    {
+      "id": "legacy-host-5:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.0X/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "5e55d542c5fc75e2b8592e62558ee675b6394396a3e78635da20ac68602ec067"
+    },
+    {
+      "id": "legacy-host-5:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.0X/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "02969f0b9fdccaad9adc40b138e325ceb3aba1cb5296851a6ac6c107d02d4ff9"
+    },
+    {
+      "id": "legacy-host-5:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.0X/01/09506000134352"
+      },
+      "expected": "https://1.0.0.0/01/09506000134352",
+      "requestSha256": "92afc16cb4e7792c1fe8bfce2e0dfd3b9626ef585480489ed4a0e359e4bed407"
+    },
+    {
+      "id": "legacy-host-6:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.2.3.0x/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "916fd1753bd0938a5065824d3a0b494d2362409d6ab2b73eea2d6ac361494dae"
+    },
+    {
+      "id": "legacy-host-6:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.2.3.0x/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "02f40af7ac4371d183ad5068454656103ac087914a713feba2ab65e8d46f57e6"
+    },
+    {
+      "id": "legacy-host-6:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.2.3.0x/01/09506000134352"
+      },
+      "expected": "https://1.2.3.0/01/09506000134352",
+      "requestSha256": "14607d184a715518383edd573fc485d2c9eda93804cef532b11f8df22906b032"
+    },
+    {
+      "id": "legacy-host-7:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0x7f000001/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "eab127ba34365c4bf8c4fb50badd2ea0891fe079cbc44103ef9549096781853c"
+    },
+    {
+      "id": "legacy-host-7:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0x7f000001/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "8f4680f8a2f1f1d21ba1b5988e9d690a97123b66597746724c0dad90fa3cdabd"
+    },
+    {
+      "id": "legacy-host-7:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0x7f000001/01/09506000134352"
+      },
+      "expected": "https://127.0.0.1/01/09506000134352",
+      "requestSha256": "f93835604489ad4fae15022e0da26d7e6494aee711e5f0aa77fe037e44ebedd0"
+    },
+    {
+      "id": "legacy-host-8:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0177.0.0.1/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "7ed8320c2a8f15e317938b1daefeb5d78b52e04c79ce5338bd533af0a8611b18"
+    },
+    {
+      "id": "legacy-host-8:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0177.0.0.1/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "f22b19214e4c8f8db05a04ab55728da70041fa0d5d4c92e6d72abd166c440ec4"
+    },
+    {
+      "id": "legacy-host-8:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0177.0.0.1/01/09506000134352"
+      },
+      "expected": "https://127.0.0.1/01/09506000134352",
+      "requestSha256": "58e1413b3c7c8c9927665639ce7b4fcf43ffe1eef738b0123fe1d6c2fe345109"
+    },
+    {
+      "id": "legacy-host-9:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://127.1/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "ee64fa48b8743c376a3470e0ddcfc6144ed06834e48df9e3cece854a976d273c"
+    },
+    {
+      "id": "legacy-host-9:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://127.1/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "afad80e36e57fea754b1cb8eaaca1bc1d3c4fdff21837efad733145a467bd7c5"
+    },
+    {
+      "id": "legacy-host-9:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://127.1/01/09506000134352"
+      },
+      "expected": "https://127.0.0.1/01/09506000134352",
+      "requestSha256": "11182a99c28d0933a60eb3ec2c341d47bd17fd3d0d34bde1c29891c9f03d00e4"
+    },
+    {
+      "id": "legacy-host-10:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://2130706433/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "611ffa9df5dfbdad0d3f7c496c2469b12c9b4ebd5ad2643e65587ff97e8c6d59"
+    },
+    {
+      "id": "legacy-host-10:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://2130706433/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "195e3ecbfc270942e8f596ef08bb3fc202e85e6686a1500bc2f10c26f98fcb8b"
+    },
+    {
+      "id": "legacy-host-10:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://2130706433/01/09506000134352"
+      },
+      "expected": "https://127.0.0.1/01/09506000134352",
+      "requestSha256": "a995d0ca054f3e80989ac595d47f7da049eaed9d4199cd8412047396a6523254"
+    },
+    {
+      "id": "legacy-host-11:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://127.0.0.01/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "95dacd9f589e5f1b7eccd3ae36a210dd289302270db04e1a1882581e4c287347"
+    },
+    {
+      "id": "legacy-host-11:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://127.0.0.01/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "726ea24c26f5fcb6466a973713eb07b30a0c9e1418228cec724669f105b81712"
+    },
+    {
+      "id": "legacy-host-11:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://127.0.0.01/01/09506000134352"
+      },
+      "expected": "https://127.0.0.1/01/09506000134352",
+      "requestSha256": "c2ef01b9bc81e235306d870dd2cca4b33b2f5599f45ddf784924226d5e3a64d4"
+    },
+    {
+      "id": "legacy-host-13:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.2.3.4./01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "5714e79ce521b77dd463ac8e3287b27844a8b4fe6e0ed6c59a48ac103ff47029"
+    },
+    {
+      "id": "legacy-host-13:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.2.3.4./01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "5bcb5e741ce9e7d902dd6b7f34e23b76662f5a86b63edf23222fc98de397b835"
+    },
+    {
+      "id": "legacy-host-13:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.2.3.4./01/09506000134352"
+      },
+      "expected": "https://1.2.3.4/01/09506000134352",
+      "requestSha256": "d3aaec71552513e5eb2c2c3b574ba94ffad1521b48e6671dfececaf7577bf3bf"
+    },
+    {
+      "id": "legacy-host-16:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://user:password@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "59abcb75029a767241b49f89359126bfbbb896612d42709c36438d06ebfc4882"
+    },
+    {
+      "id": "legacy-host-16:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://user:password@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "770c1a028f449be0098e27d0c9c547f382ab7d07589a0010f34ec520c91a4c96"
+    },
+    {
+      "id": "legacy-host-16:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://user:password@example.com/01/09506000134352"
+      },
+      "expected": "https://user:password@example.com/01/09506000134352",
+      "requestSha256": "38103c8e670df68a4d6158411d5d9322df25066648235de9c9d04c3d301b580e"
+    },
+    {
+      "id": "legacy-host-17:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://user@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "4a5be0571e4516c7e9a18b4e011098df6ef27d2e8cbcd0e4af594a7887f13f49"
+    },
+    {
+      "id": "legacy-host-17:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://user@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "a45e4d06b4ece3f27dfa01824af492c7e57295708a2fe72530102fbc4d15a0eb"
+    },
+    {
+      "id": "legacy-host-17:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://user@example.com/01/09506000134352"
+      },
+      "expected": "https://user@example.com/01/09506000134352",
+      "requestSha256": "dd7027026522559deee9c4ba4dbfaca026678fe286336cc0055081b667140051"
+    },
+    {
+      "id": "legacy-host-19:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://%65xample.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "d9695cc8fdc98a56034e1203c50e910aab5b377bea2b589b2bd54b3bbd88fd59"
+    },
+    {
+      "id": "legacy-host-19:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://%65xample.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "2c6eb8076f633f6bd0ec99071d7286f947ded073a82f124745f48d1867d94b65"
+    },
+    {
+      "id": "legacy-host-19:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://%65xample.com/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "68337f5c5dc9cdb39cf81b8d4828f334a877dd2b698dea51c62a6c2654ccc8c2"
+    },
+    {
+      "id": "legacy-host-20:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://a..example/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "c8ab8dce0868bcbb372febcb126167375cf88dac1ab5830c3df7aa29177447fc"
+    },
+    {
+      "id": "legacy-host-20:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://a..example/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "8a514e5b07828009cbc0f99661fa64e6cadd20e4a8ecb20449a1fd752b1801d9"
+    },
+    {
+      "id": "legacy-host-20:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://a..example/01/09506000134352"
+      },
+      "expected": "https://a..example/01/09506000134352",
+      "requestSha256": "c031671f3035be35bd15616f1d057d93cf208bef034f9b4dae1a1882b1e7ee37"
+    },
+    {
+      "id": "legacy-host-21:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://-bad.example/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "d925fad79c77991962d1119f8aaa70c766b912663d49dd8bf7c91325a29afd08"
+    },
+    {
+      "id": "legacy-host-21:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://-bad.example/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "fdc65ec1c01b8ba89e6a2bad7f0edb1288312d058f0e65d3bf273d13cced4a29"
+    },
+    {
+      "id": "legacy-host-21:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://-bad.example/01/09506000134352"
+      },
+      "expected": "https://-bad.example/01/09506000134352",
+      "requestSha256": "39c0770dce114388eb89df460020d604eb4441a3455796a2080c29e39331bef7"
+    },
+    {
+      "id": "legacy-host-22:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://bad-.example/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "563428912197c4ecfc6f25c6872becb84c2dad5a315d4a2b3f2abd3de7d95e7e"
+    },
+    {
+      "id": "legacy-host-22:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://bad-.example/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "29f44dc7f27608772c200605a3f318b0f8272e560f1b7bfe36fb00d33619c89d"
+    },
+    {
+      "id": "legacy-host-22:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://bad-.example/01/09506000134352"
+      },
+      "expected": "https://bad-.example/01/09506000134352",
+      "requestSha256": "3417e7c4f92467c74e7b0a5e180a1e966df21ab452597c4013f870b37920a29b"
+    },
+    {
+      "id": "legacy-host-23:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://bad_name.example/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "46af26ba52ab83178a13ab72b183515c508285a816daac0eb07e2ad72a99faaf"
+    },
+    {
+      "id": "legacy-host-23:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://bad_name.example/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "c520870776b6620ceef8c8b3d53d5054b7d3a8c9b08b5b2ddf576232701b76ff"
+    },
+    {
+      "id": "legacy-host-23:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://bad_name.example/01/09506000134352"
+      },
+      "expected": "https://bad_name.example/01/09506000134352",
+      "requestSha256": "74e65ac2ca6550c2fb9d7324981248c8926b297d59b7e15017d6aff770ebb82c"
+    },
+    {
+      "id": "legacy-empty-port:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com:/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "bbf8c26e6d3f6f99e7aa9476f81e926be89a8f5befbfa8743f9544797c0eaba3"
+    },
+    {
+      "id": "legacy-empty-port:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com:/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "42c9b1c0328de67e70f265780a8e04d97cefe12b84b9cd38ed276c3ac0f546aa"
+    },
+    {
+      "id": "legacy-empty-port:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com:/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "480e124b250be84f925a55589a64d7437b8a37b1df204bc1a92cdaff11cee3c1"
+    },
+    {
+      "id": "legacy-empty-fragment:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com/01/09506000134352#"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "97a495dd06f51410de56a869311418f51c25a19882c015bb423ce7f7a836647f"
+    },
+    {
+      "id": "legacy-empty-fragment:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com/01/09506000134352#"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "28594c6ce0ec0bc80aba7b4955e679f97af0f79857d5285e892c43771064742f"
+    },
+    {
+      "id": "legacy-empty-fragment:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com/01/09506000134352#"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "9cd17d53a3514fb26ff24bf416bd5f1e6c0531461089e5c1a999f283327dc8c9"
+    },
+    {
+      "id": "legacy-path-backslash:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com\\x/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "4973b19caad67831518484eba1e9a8b2caed486d54ef1a6a56bf3002ecad963b"
+    },
+    {
+      "id": "legacy-path-backslash:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com\\x/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "e60dccc25a4cc72340ab8beb24c4ed2d2129797a019af928f7350d32dfe87410"
+    },
+    {
+      "id": "legacy-path-backslash:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com\\x/01/09506000134352"
+      },
+      "expected": "https://example.com/x/01/09506000134352",
+      "requestSha256": "b6620022ae3d4586d87415fcff35c42721ad83eaeb35eb008b9d88ae2df489f0"
+    },
+    {
+      "id": "legacy-leading-space:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": " https://example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "0767a56a7ce3aa9f116609514bff8864efbf6a31b4e193a63fc2cdba284724f1"
+    },
+    {
+      "id": "legacy-leading-space:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": " https://example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "b1a1ef7006dc25ef36445e5a414a2f6a2c8833663362992018962070f4f93fa0"
+    },
+    {
+      "id": "legacy-leading-space:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": " https://example.com/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "62f37865fe6d56e1c4ee23b5c15cc1f32304d0a1dc8d916f5119c6282b5bc925"
+    },
+    {
+      "id": "legacy-query-space:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com/01/09506000134352?x=raw space"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": [
+          {
+            "key": "x",
+            "value": "raw space"
+          }
+        ]
+      },
+      "requestSha256": "dc469eab5871ba5611037bcae779549f417d8f5fb98e6d2a4dafda9b6b4b8908"
+    },
+    {
+      "id": "legacy-query-space:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com/01/09506000134352?x=raw space"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": [
+            {
+              "key": "x",
+              "value": "raw space"
+            }
+          ]
+        },
+        "warnings": [
+          {
+            "code": "GS1_DIGITAL_LINK_UNKNOWN_QUERY_PRESERVED",
+            "message": "GS1 Digital Link URI contains non-GS1 query parameters preserved in unknownQuery.",
+            "reason": "unknown-query-preserved",
+            "count": 1
+          }
+        ]
+      },
+      "requestSha256": "466d9329e625cd1fcada93462bd28e0667b13436e25136656009d38a89a6a390"
+    },
+    {
+      "id": "legacy-query-space:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com/01/09506000134352?x=raw space"
+      },
+      "expected": "https://example.com/01/09506000134352?x=raw+space",
+      "requestSha256": "3a107103c42932ac6d6980093078571e996f9eec2de6c95a79c5f3eb0e5affed"
+    },
+    {
+      "id": "boundary-positive-0:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://4294967295/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "e6ebfa426068b0ddb9bceb6d56599aa6d8dd7c239a657804f1e32fffe25ec95b"
+    },
+    {
+      "id": "boundary-positive-0:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://4294967295/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "7d20fdccbfab8fd917502410de8d183a355af363f89d4ca6914acae4c9831181"
+    },
+    {
+      "id": "boundary-positive-0:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://4294967295/01/09506000134352"
+      },
+      "expected": "https://255.255.255.255/01/09506000134352",
+      "requestSha256": "3b54fe12a028d850f67d06d513bda90515cf9b82783f1dc3b6636cbcb4744a1b"
+    },
+    {
+      "id": "boundary-positive-1:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0xffffffff/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "fa568399a4eef490d545dac1d26f1f8bc3a1e754269f19fa4413ac3d9b248425"
+    },
+    {
+      "id": "boundary-positive-1:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0xffffffff/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "f5289e9366df284b2b2877a160c220eb5ffb8bd6fa1164daaa078e3a4b2d76c7"
+    },
+    {
+      "id": "boundary-positive-1:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0xffffffff/01/09506000134352"
+      },
+      "expected": "https://255.255.255.255/01/09506000134352",
+      "requestSha256": "6f74df917231602aaacb78abb065ec220b20f104a76ffdc5d6f89a4b9b112e68"
+    },
+    {
+      "id": "boundary-positive-2:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://037777777777/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "141776cf93e989283322308932bc937231c0d8750623cdaf8daaada2af8e8406"
+    },
+    {
+      "id": "boundary-positive-2:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://037777777777/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "d186fcb5753e72f67ba0de0cf62e935f49c81616ee2dcbaae9e3ce8deb1b2a76"
+    },
+    {
+      "id": "boundary-positive-2:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://037777777777/01/09506000134352"
+      },
+      "expected": "https://255.255.255.255/01/09506000134352",
+      "requestSha256": "72e05ed90602176e94e5640100c45f83765bda82d1ce604a744b6f71f7010ad0"
+    },
+    {
+      "id": "boundary-positive-3:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.16777215/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "a8a17f8d3c4b7407590b0629acbbdc4d897b7ead809f6f80f4a92761bc10387e"
+    },
+    {
+      "id": "boundary-positive-3:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.16777215/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "0485460787b7022cc6ba64754b0624fe3ff9d5bc364d961a6afef7811cfd5b65"
+    },
+    {
+      "id": "boundary-positive-3:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.16777215/01/09506000134352"
+      },
+      "expected": "https://1.255.255.255/01/09506000134352",
+      "requestSha256": "a7efc97721bd587eb17c42bb51bdab516e7deb991f4f426dea635b1e4bfa9d77"
+    },
+    {
+      "id": "boundary-positive-4:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.2.65535/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "a17de4e6ab961febae34384e7033206cd6e9e695899c982bebc59433f636af44"
+    },
+    {
+      "id": "boundary-positive-4:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.2.65535/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "24f9ba524a176b578c7c49f85caa48f2f780e779d42efb5ba1955437e721ee05"
+    },
+    {
+      "id": "boundary-positive-4:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.2.65535/01/09506000134352"
+      },
+      "expected": "https://1.2.255.255/01/09506000134352",
+      "requestSha256": "3f64e62eace7f71f46f5be14a239b2f85a1ab45be5cbc526e92043d2a7f7be72"
+    },
+    {
+      "id": "boundary-positive-5:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.2.3.255/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "838a24fe5a5db6a992ac9108673a07b4cedfc3bd23aa847221f4d509ac2e956f"
+    },
+    {
+      "id": "boundary-positive-5:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.2.3.255/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "d3e4cee967b542c3508863347aa4f98f7370ef47134f219aa9517984840dd9c2"
+    },
+    {
+      "id": "boundary-positive-5:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.2.3.255/01/09506000134352"
+      },
+      "expected": "https://1.2.3.255/01/09506000134352",
+      "requestSha256": "33175305400889994431d3b63729550e73ed5002b98573efc3b2a66dde454529"
+    },
+    {
+      "id": "boundary-positive-6:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://0xg/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "87564e37190f2b9b7a680954922556c53a159a016ce54564fc7ba27ac2298255"
+    },
+    {
+      "id": "boundary-positive-6:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://0xg/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "c0532be9633ee69906a6a59fd018582680d72d98d34c755e341f483322d79a54"
+    },
+    {
+      "id": "boundary-positive-6:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://0xg/01/09506000134352"
+      },
+      "expected": "https://0xg/01/09506000134352",
+      "requestSha256": "529f3251061d461fef45dd865316e047f7ca76902507429440373cbdb4900876"
+    },
+    {
+      "id": "boundary-positive-7:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.0xg/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "43c1e59961886afdff031c9810fa38d4ed31bdefcc8b3c244c33fa1d780bab13"
+    },
+    {
+      "id": "boundary-positive-7:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.0xg/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "19bb6563918eff8d10343f71d79e65b4a3b0dfe56d7d0a46a9f0da74241ec3f3"
+    },
+    {
+      "id": "boundary-positive-7:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.0xg/01/09506000134352"
+      },
+      "expected": "https://1.0xg/01/09506000134352",
+      "requestSha256": "dff9c621ca1149ac21d7742a26bb58e2fc2c89c8c3a3b98eac962d70e2b73383"
+    },
+    {
+      "id": "boundary-positive-8:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://[0:0:0:0:0:0:0:0]/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "4ff5c2fa54c9710b1155bf1faea4e9f27e5f530f02d39ff7735e28b1e80d8e44"
+    },
+    {
+      "id": "boundary-positive-8:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://[0:0:0:0:0:0:0:0]/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "895610e8d159cef27f613db70343be37b85189ce13a11b04587a196e290301e0"
+    },
+    {
+      "id": "boundary-positive-8:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://[0:0:0:0:0:0:0:0]/01/09506000134352"
+      },
+      "expected": "https://[::]/01/09506000134352",
+      "requestSha256": "8e80f7dd5dc4c17f9933d73f546cd47c583cf04b35b864d214e4a344ba8ee31b"
+    },
+    {
+      "id": "boundary-positive-9:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://[1:0:0:2:0:0:3:4]/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "d493b82ca76f0820d83cd3803f1fc18fa563788dd6f2aa63754cd3334db2cd2b"
+    },
+    {
+      "id": "boundary-positive-9:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://[1:0:0:2:0:0:3:4]/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "30e64acab74771bfade97b4ff6fb863cb09faced1eebaeaec7a02ccf44b79a9b"
+    },
+    {
+      "id": "boundary-positive-9:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://[1:0:0:2:0:0:3:4]/01/09506000134352"
+      },
+      "expected": "https://[1::2:0:0:3:4]/01/09506000134352",
+      "requestSha256": "f915603dfc117160483b400cae93193a1c5e063d22c2b8b49c77fa490ca0daeb"
+    },
+    {
+      "id": "boundary-positive-10:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://[::ffff:192.0.2.1]/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "e96ae036e84f7ac94f93ffcaa3305234d92a6606bc7526a75ab703435a2ebbc4"
+    },
+    {
+      "id": "boundary-positive-10:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://[::ffff:192.0.2.1]/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "d47f6d8be6384c395fa812545949dedd662bba5ad76fa978722775cd970c9816"
+    },
+    {
+      "id": "boundary-positive-10:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://[::ffff:192.0.2.1]/01/09506000134352"
+      },
+      "expected": "https://[::ffff:c000:201]/01/09506000134352",
+      "requestSha256": "d548d73b421fab7f3fe626f6a6daa6bd30b7263ba19f4a8e92bef6974e4678af"
+    },
+    {
+      "id": "boundary-positive-11:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://u:p:a@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "2686c8db9fe615c3abe1d752ae86573fcfbd671eb298f257bce33f6c4e89ebbf"
+    },
+    {
+      "id": "boundary-positive-11:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://u:p:a@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "547e44222d19c5f2ff702bc0b4b55e5020d3a0b173b5d53b7bb936c380442437"
+    },
+    {
+      "id": "boundary-positive-11:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://u:p:a@example.com/01/09506000134352"
+      },
+      "expected": "https://u:p%3Aa@example.com/01/09506000134352",
+      "requestSha256": "940bbcf2a71610c72b6809f57b5189ef14ca3581c81df3f0f01f07a43aac234c"
+    },
+    {
+      "id": "boundary-positive-12:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://u@v:p@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "2dcd9581285a7341dd3ecdc70a80b9b2c03937c8886a7fe99dfffe5f47a07f7f"
+    },
+    {
+      "id": "boundary-positive-12:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://u@v:p@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "3445808bdda68598da491d0be0096de8831c966864f862c3ecff411caddd9314"
+    },
+    {
+      "id": "boundary-positive-12:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://u@v:p@example.com/01/09506000134352"
+      },
+      "expected": "https://u%40v:p@example.com/01/09506000134352",
+      "requestSha256": "ca27791e78c72a045ffb3b925ba96697c9ad884627ed86d7b67d4803b2f20eef"
+    },
+    {
+      "id": "boundary-positive-13:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://u%40v:p%3Aa@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "dd31d4637b22486b45b738d95862b35871da16ecb5580af0cc0fe249522700ce"
+    },
+    {
+      "id": "boundary-positive-13:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://u%40v:p%3Aa@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "24b767d8f7e9f51a81e2c1b5fb08738e933deeb54711d73d2470959ea4f5d110"
+    },
+    {
+      "id": "boundary-positive-13:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://u%40v:p%3Aa@example.com/01/09506000134352"
+      },
+      "expected": "https://u%40v:p%3Aa@example.com/01/09506000134352",
+      "requestSha256": "85e20a14fb7863175c8391442f19554fbf3bd54e96718aa029b3e891c16f524e"
+    },
+    {
+      "id": "boundary-positive-14:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://u:\u65e5\u672c@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "3f13e6dd6d81752f53a0c6e2304bebea547420c497dc54558940c5df5dca489e"
+    },
+    {
+      "id": "boundary-positive-14:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://u:\u65e5\u672c@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "322961d6930a9eb386d6559a2326c1eb83d1b162ccc6712dfdd6a673c7b5c412"
+    },
+    {
+      "id": "boundary-positive-14:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://u:\u65e5\u672c@example.com/01/09506000134352"
+      },
+      "expected": "https://u:%E6%97%A5%E6%9C%AC@example.com/01/09506000134352",
+      "requestSha256": "4d69a85edf3168990b5c5faf2ee0d5c00fd09eb907da56a552c1138fe83610d8"
+    },
+    {
+      "id": "boundary-positive-15:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "6ab57c05caebf8aabeaeb528f66110d000ca5d2a37108bfd9064ac6697f429af"
+    },
+    {
+      "id": "boundary-positive-15:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "a558a2c66368fc35d4ba6467c2c432a980ed25d11ac63c530515cff2732c1525"
+    },
+    {
+      "id": "boundary-positive-15:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://@example.com/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "8a571d9d44d77ab3de9aadf19a4fc382b3d954c67982377c3e502333c2066427"
+    },
+    {
+      "id": "boundary-positive-16:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://:@example.com/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "6e69ac8d9c39ba13a9890e699621d6127469bef4879b6b951138d427812ef80b"
+    },
+    {
+      "id": "boundary-positive-16:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://:@example.com/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "f94975aacad92c1fd78fbfb241b6ea2c4dc3eab1db722acdc36917c93d175333"
+    },
+    {
+      "id": "boundary-positive-16:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://:@example.com/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "548eb112b922e35316a5e9b7b8f30cef5bb955cccf59edc1d997c002e6912b4c"
+    },
+    {
+      "id": "port-boundary-0:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com:0000000000443/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "4db79dd585f0a7997f2da5131a534615b76ae957e83bcd5586ec99b8a1c99af1"
+    },
+    {
+      "id": "port-boundary-0:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com:0000000000443/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "21ad3854667bcc72ee6256f43dd20821637e54990666ebcbb42d00cbe531b631"
+    },
+    {
+      "id": "port-boundary-0:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com:0000000000443/01/09506000134352"
+      },
+      "expected": "https://example.com/01/09506000134352",
+      "requestSha256": "3716cff0f18be4283702c75769f829aa54ce56c1811c9dbecc503b6eba4b1e57"
+    },
+    {
+      "id": "port-boundary-1:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com:0000000000000/01/09506000134352"
+      },
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      },
+      "requestSha256": "e4d256a6a8decc3969f3b93e4371bfe6ea3f98cdb28faf69fc77ee1d42e562c9"
+    },
+    {
+      "id": "port-boundary-1:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com:0000000000000/01/09506000134352"
+      },
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      },
+      "requestSha256": "c9bd7c1ec9c1c1caca50aa8c1186707aea256e933af19c69d14c35fe0d73622c"
+    },
+    {
+      "id": "port-boundary-1:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com:0000000000000/01/09506000134352"
+      },
+      "expected": "https://example.com:0/01/09506000134352",
+      "requestSha256": "9d83fdeab0563f6b8cbef024b7de9d910da2426d0fdc58c6cd93f609d79397d8"
+    },
+    {
+      "id": "reg-name-invalid-hex:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://1.2.3.0xg/01/09506000134352"
+      },
+      "requestSha256": "91b0d8e634a0860b7b4526345e7fcc1de0c8efa1c195e920d18769f0efbc271f",
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      }
+    },
+    {
+      "id": "reg-name-invalid-hex:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://1.2.3.0xg/01/09506000134352"
+      },
+      "requestSha256": "36d825c46707fec349076b3fa9a77fbffc9f7e9cfc1487dee1574597a5c89654",
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      }
+    },
+    {
+      "id": "reg-name-invalid-hex:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://1.2.3.0xg/01/09506000134352"
+      },
+      "requestSha256": "7a267ced69dab826e848b7a782cce5e94e719fc44bcd0bec7a3fec7d6b6815e3",
+      "expected": "https://1.2.3.0xg/01/09506000134352"
+    },
+    {
+      "id": "caret-prefix:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com/^/01/09506000134352"
+      },
+      "requestSha256": "3d22d5f54fef265636b6090da586ca20185cb35e521c2e956a6853a70bb3bebe",
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      }
+    },
+    {
+      "id": "caret-prefix:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com/^/01/09506000134352"
+      },
+      "requestSha256": "003d7b0812438481c2286c3ad9987f1ad46657cae1fcb97dfc96dfe5769d8ba8",
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      }
+    },
+    {
+      "id": "caret-prefix:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com/^/01/09506000134352"
+      },
+      "requestSha256": "149f21ee657a3ee19ff9b3d88da0f2abca0b3b43bf6e486c7db09f9dd6968a85",
+      "expected": "https://example.com/%5E/01/09506000134352"
+    },
+    {
+      "id": "caret-unicode-prefix:linkParse",
+      "request": {
+        "op": "linkParse",
+        "input": "https://example.com/\u65e5\u672c^\ud83d\ude00/01/09506000134352"
+      },
+      "requestSha256": "061c7d62f8321d79a0a17d46264a55b17a476b91314fd05567f891d56ab49bb4",
+      "expected": {
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "primary": {
+          "ai": "01",
+          "value": "09506000134352"
+        },
+        "pathElements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "queryElements": [],
+        "unknownQuery": []
+      }
+    },
+    {
+      "id": "caret-unicode-prefix:linkValidate",
+      "request": {
+        "op": "linkValidate",
+        "input": "https://example.com/\u65e5\u672c^\ud83d\ude00/01/09506000134352"
+      },
+      "requestSha256": "12c5995051cd33c015b1432864fa7196e816f78c0e3f09c2123af4ecfe0fa36f",
+      "expected": {
+        "ok": true,
+        "result": {
+          "elements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "primary": {
+            "ai": "01",
+            "value": "09506000134352"
+          },
+          "pathElements": [
+            {
+              "ai": "01",
+              "value": "09506000134352"
+            }
+          ],
+          "queryElements": [],
+          "unknownQuery": []
+        },
+        "warnings": []
+      }
+    },
+    {
+      "id": "caret-unicode-prefix:linkNormalize",
+      "request": {
+        "op": "linkNormalize",
+        "input": "https://example.com/\u65e5\u672c^\ud83d\ude00/01/09506000134352"
+      },
+      "requestSha256": "4dd6d525390af9a50752af959a398ffa6c38b4d5561583bae3717c2735fccde7",
+      "expected": "https://example.com/%E6%97%A5%E6%9C%AC%5E%F0%9F%98%80/01/09506000134352"
+    },
+    {
+      "id": "caret-base-builder:linkCreate",
+      "request": {
+        "op": "linkCreate",
+        "elements": [
+          {
+            "ai": "01",
+            "value": "09506000134352"
+          }
+        ],
+        "options": {
+          "baseUrl": "https://example.com/^"
+        }
+      },
+      "requestSha256": "b19f2d8c74d4422681ce9f8b344d54eb68226bc4bdff18b4661eb58174f04e94",
+      "expected": "https://example.com/%5E/01/09506000134352"
+    }
+  ]
+}

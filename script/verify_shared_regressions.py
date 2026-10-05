@@ -8,6 +8,7 @@ if not __debug__:raise SystemExit("Verification requires Python assertions; do n
 sys.path.insert(0,str(a.python_deps.resolve()))
 import zxingcpp
 from decoder_support import verify_png
+from gs1_contract import load_shared,compare_contract,accepted
 
 def main():
  corpus=PKG/'verification/fixtures/expected-contract-vectors.json'
@@ -68,12 +69,16 @@ def main():
   authority=PKG/'verification/fixtures/strict-authority-vectors.json'
   strict=json.loads(authority.read_text());report['strictAuthorityFixtureSha256']=digest(authority)
   counts['strictAuthorityOperations']=0
-  for v in strict['vectors']:
-   for op in ['parse','validate','normalize']:
-    q=execute(binary_command(binary),[{'command':'digital-link-'+op,'url':v['input']}])[0]
-    if op=='validate':assert q.get('ok') is False,(v['id'],op,q)
-    else:assert q.get('code')=='INVALID_GS1',(v['id'],op,q)
-    counts['strictAuthorityOperations']+=1
+  gs1=load_shared();report['sharedGs1Fixtures']=gs1['artifacts'];counts['sharedGs1Operations']=0;counts['sharedGs1Accepted']=0
+  for row in gs1['current']['cases']:
+   q=execute(binary_command(binary),[{'command':'gs1-fixture',**row['request']}])[0]
+   expected=gs1['residual'].get(row['id'],row)['expected']
+   assert isinstance(q,dict) and 'value' in q,q
+   compare_contract(expected,q['value'],row['id']);counts['sharedGs1Operations']+=1
+   counts['sharedGs1Accepted']+=int(accepted(q['value']))
+   if row['id'].startswith('bare-hex-ipv4-'):counts['strictAuthorityOperations']+=1
+  assert (counts['sharedGs1Operations'],counts['sharedGs1Accepted'],counts['strictAuthorityOperations'])==(49,25,21),counts
+  assert counts['percentVectors']==102 and counts['digitalLinkOperations']==28 and counts['printDpiCases']==15 and counts['bridgeEccCases']==20,counts
   finish_clients(report)
   assert snapshot()==report['sourceSha256'],'Source changed during verification'
   report['status']='passed'

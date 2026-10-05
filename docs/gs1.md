@@ -142,37 +142,41 @@ as unknown. An encoded primary-AI path segment is not used for discovery.
 `mode => 'specqr-deterministic'`, the only supported mode. It rebuilds known
 fields deterministically, chooses default eligible qualifiers for the path,
 sorts known query data, and appends unknown query pairs in their original order.
-It is idempotent in its documented URL profile. Normalizing is not a promise that
-all semantically equivalent IPv6 spellings become the same string.
+It is idempotent in its documented URL profile. IPv6 hex groups use lowercase,
+remove leading zeroes, compress the first longest zero run, and convert embedded
+IPv4 into hex groups.
 
-## Explicit strict offline URL profile
+## 互換性を拡張したオフライン URL プロファイル
 
-This implements the current Nim SpecQR profile, not the full browser WHATWG URL
-algorithm. It is not a safety check, a public-Internet eligibility check, or an
-SSRF defense. Localhost, private addresses and loopback are accepted syntax.
+通常の QR 生成・FNC1・バイナリ API の契約を変えず、従来不要に拒否していた
+URL を受け入れます。QR コアや実行時依存関係の変更はありません。URL を開く、
+DNS を引く、認証情報を使って接続する操作は行いません。URL 構文の受け入れは
+アクセス先の安全性や公開インターネット上の到達性を保証せず、SSRF 防御ではありません。
 
-Accepted authorities:
+- 空のフラグメント `#` を許容します。非空フラグメントは拒否します。
+  builder は空の `#` を末尾に保ち、normalizer はそれを取り除きます。
+- builder の空 query `?` を許容します。非空の base query は拒否します。
+- HTTP(S) の欠落・余分なスラッシュ、前後の ASCII 空白、TAB/LF/CR を
+  ブラウザ互換に補正します。authority/path の backslash は slash に直し、
+  query の backslash はデータとして保存します。
+- ASCII percent-encoded host と URL reg-name を許容します。DNS label
+  制限を URL 構文検証に流用しません。host の空白、区切り文字、NUL は拒否します。
+- userinfo の構文を許容し、必要な escaping を行います。既存 percent bytes を
+  二重デコードせず保存します。エラーに userinfo を追加しません。
+- decimal/octal/hex の数値 IPv4 別名を通常の dotted decimal に直します。
+  桁ごとの上限検査により overflow と不正な数値を拒否します。`0xg` のような
+  非数値の最終ラベルは reg-name です。`08` や `0xg.1` は不正な IPv4 として拒否します。
+- bracketed IPv6 は完全に検証してから正規化します。zone ID、不正な圧縮、
+  不正な embedded IPv4 は拒否します。
+- port は十進の 0–65535。空 port と先頭ゼロを許容し、既定 port は省略します。
 
-- ASCII DNS labels, including punycode labels and one trailing DNS dot; 1–63 characters per label, maximum 253 excluding that final dot
-- Canonical four-component decimal IPv4, without leading zeroes or a trailing dot
-- Bracketed RFC-style IPv6, including a canonical dotted-decimal IPv4 tail
-- Decimal ports containing 1–5 digits in 0–65535; default HTTP/HTTPS ports are removed and other leading zeroes are normalized
-
-DNS/scheme case and IPv6 hex case are normalized. IPv6 zero compression and
-embedded IPv4 spelling are preserved rather than rewritten. No IDNA mapping,
-DNS lookup, address resolution, or hostname reachability test is performed.
-
-Rejected forms include credentials, raw non-ASCII hosts, percent-encoded hosts,
-IPv6 zone identifiers, underscores or malformed DNS labels, and browser IPv4
-aliases such as `127.1`, `0177.0.0.1`, `0x7f000001`, `0x`, or `1.0x`.
-
-The URL must explicitly use `http://` or `https://`. Browser repairs such as
-`https:example.com`, `https:/example.com`, excess authority slashes, backslashes,
-or trimming whitespace are not performed. Any literal `#` is rejected, including
-an empty fragment. Base URLs cannot contain even an empty query delimiter.
-Raw U+0000–U+0020, U+007F and backslashes are rejected everywhere. Unknown
-percent-encoded non-NUL controls may be preserved as query data; URL parsing
-is not general content sanitization.
+Perl core には完全な UTS46/IDNA host 処理がありません。依存なしの契約を維持するため、
+非 ASCII host は明示的な対象外とし、不完全な IDNA を実装しません。ASCII punycode
+の表記は受け入れます。これは Godot の制約を転用した判断ではありません。
+ASCII の `xn--` 接頭辞をもつ host も完全な UTS46/ACE 妥当性検証は行いません。
+たとえば `xn--a` は以前から受け入れられ、bare `xn--` は今回の reg-name 拡張で
+受け入れられますが、current TypeScript はどちらも拒否します。これは元の 1,411 件の
+外側にある既知の相違で、168 件という corpus 内差分の集計には混ぜません。
 
 Every percent escape is checked and decoded as strict scalar UTF-8. Invalid
 escapes, overlong sequences, lone surrogates, values above U+10FFFF, truncated
@@ -183,11 +187,12 @@ Output uses uppercase percent hex and form encoding for queries.
 Path AI/value segments are checked *before* any dot-segment normalization.
 Literal or percent-encoded `.`/`..` path values are rejected. A literal data string
 `%2e` roundtrips as `%252e`. Query values `.` and `..` remain data. Only the
-non-GS1 base/prefix path receives dot-segment cleanup. Other prefix spelling is
-preserved, including valid escapes and Unicode; this is not WHATWG percent
-serialization of arbitrary prefix characters. Empty internal path segments are
+non-GS1 base/prefix path receives dot-segment cleanup. Existing valid escapes in prefixes are preserved; raw path characters receive
+WHATWG-compatible UTF-8 percent serialization without dot-path data loss. Empty internal path segments are
 rejected during parsing, while leading/trailing slashes are tolerated. The
-builder normalizes empty prefix segments. After prefix cleanup, a base URL may
+builder normalizes empty prefix segments. For example, base `/a//b` becomes
+`/a/b`; current TypeScript preserves the repeated slash. This is an inherited
+builder-only difference outside the original 1,411-case corpus. After prefix cleanup, a base URL may
 not contain literal or encoded primary-AI components.
 
 ## Validation and errors
@@ -223,43 +228,34 @@ present as `undef`. English wording is informative, not a compatibility key.
 - URL components, decoded fields, output size and query-pair aggregate are bounded
 - `GS1_FNC1_SEPARATOR`: U+001D
 
-## Verification and intentional reference differences
+## 検証と意図的な差分
 
-Run `prove -lv t/gs1.t`. It executes all 1,411 pinned historical TypeScript GS1
-cases, every strict-authority vector, plus native catalog, type, Unicode,
-resource-budget, validation and data-preservation tests. No case is skipped.
+`prove -lv t/gs1.t` は元の 1,411 入力をすべて実行します。履歴 corpus
+`15ad15e5c770ea0e39072f8f88b2733018f02ffd` と旧 252 差分 ledger は変更していません。
+現在の独立 TypeScript oracle は `16efc6c0a8e397c9df3d051d20fce6c1eebdfad7` です。
+期待値を Perl 出力から生成せず、TypeScript の実行結果に request hash で結びます。
 
-The historical corpus is unchanged from TypeScript commit
-`15ad15e5c770ea0e39072f8f88b2733018f02ffd`. Expected profile differences are
-independently generated from Nim commit
-`4f9154664d35a24cecb30b75cfdba0a9f16ced3e`, not inferred from this Perl
-implementation. The pinned Nim GS1 source SHA-256 is
-`9df6a11927f265108e4d01e3321a208e1bcd4f9c484ff6aad5f9b8bd42734fa3`.
-All 1,411 Perl contracts match that oracle. `gs1-perl-deltas.json` records each
-of 252 historical differences, its explanation, expected outcome, and provenance:
+Perl 5.42.3 と 5.44.0 の公開版 baseline はどちらも 1,163 一致、248 差分でした。
+受け入れ拡張の 77 件と IPv6 正規化の 3 件を復元し、現在は 1,243 一致、168 差分です。
 
-- 50 empty values receive `invalid-length`
-- 27 invalid-option reason labels follow Nim
-- 2 raw validations enforce Digital Link primary context
-- 18 missing-primary diagnostics use placement errors
-- 8 malformed-path reason labels follow Nim
-- 27 strict percent/Unicode differences
-- 11 fragment differences
-- 10 explicit absolute-URI differences
-- 80 authority-profile differences
-- 4 empty-base-query differences
-- 2 safe dot-only builder outputs
-- 3 IPv6 textual-normalization differences
-- 6 raw-whitespace/backslash differences
-- 4 early dot-path rejection differences
+- 診断だけの差分: 132
+- TypeScript が受理し Perl が拒否: 34（不正 percent/UTF-8/NUL 20、IDNA host 12、raw Digital Link primary context 2）
+- 安全なドット query builder 出力を Perl が受理: 2
+- 受理済み出力の正規化差分: 0
 
-Current TypeScript commit `16efc6c0a8e397c9df3d051d20fce6c1eebdfad7` was
-also independently executed over the same 1,411 inputs with Node.js v24.19.0.
-It changes six historical dot-safety cases. Against that current reference,
-1,163 Perl contracts agree and 248 retain the documented Nim profile/diagnostic
-differences. The current audit's six exact outputs and source hash are retained
-in the delta artifact. This is an explicit bounded compatibility profile, not
-an assertion of full WHATWG or full GS1 coverage.
+`approved-restorations80.json` は 80 個の正確な positive assertion、
+`native-intentional-deltas168.json` は残る各契約を記録します。
+`diagnostic-migrations5.json` の 930/1038/1056 は lexical/authority 修復後の
+primary 検証、1269/1272 は host percent decode に診断が移動します。
+独立 Nim witness と同じ code/reason を各 Perl 実行でも確認します。
 
-Optional oracle harnesses are under `verification/gs1/`. Nim/Node.js are needed
-only to regenerate reference evidence, never to run the library or normal tests.
+すべての旧 authority 入力を残し、6 host の 18 操作を TypeScript-positive に移し、
+`example.0x` の 3 拒否を保ちます。共有 GS1 は全 49 操作、FNC1 percent は全 102 入力
+（70 成功、10 forced-alpha 拒否、22 capacity 拒否）と manual 4 件を実行します。
+追加の 139 TypeScript-positive 操作は旧 native URL assertion の移動と境界条件を検証します。
+型、リソース制限、dot-path、percent data、認証情報の非漏洩、overflow の negative control も残します。
+
+履歴 assertion の移動先は [URL assertion mapping](url-compatibility-mapping.md) に記載します。
+`script/verify_gs1.py` は exit、stderr、response 数、fixture/source hash、unexpected field を
+厳密に検査します。任意の oracle 再生成だけが Node/Nim を使い、通常の package test は
+Perl core module のみです。

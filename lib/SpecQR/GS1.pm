@@ -399,38 +399,112 @@ sub _ipv6 {
     if (@parts==2) { my $a=_ipv6_side($parts[0]);my $b=_ipv6_side($parts[1],1); return $a>=0 && $b>=0 && $a+$b<8; }
     return 0;
 }
-sub _host_fail { _fail('Unsupported host profile; use ASCII DNS, canonical dotted IPv4, or RFC IPv6 without credentials','GS1_DIGITAL_LINK_UNSUPPORTED_HOST'); }
+sub _host_fail { _fail('Unsupported host profile; use an ASCII URL host or RFC IPv6','GS1_DIGITAL_LINK_UNSUPPORTED_HOST'); }
+sub _ipv4_number {
+    my ($s)=@_; return -1 if $s eq '';
+    my $radix=10;
+    if ($s =~ s/\A0[xX]//) { $radix=16; }
+    elsif (length($s)>=2 && $s =~ s/\A0//) { $radix=8; }
+    my $n=0;
+    for my $c (split //,$s) {
+        my $d=index('0123456789abcdef',lc($c)); return -1 if $d<0 || $d >= $radix;
+        # Saturate before arithmetic, then keep validating every remaining digit.
+        $n=$n>int((4294967295-$d)/$radix) ? 4294967296 : $n*$radix+$d if $n<4294967296;
+    }
+    return $n;
+}
+sub _normalize_ipv4_host {
+    my ($host)=@_; my @parts=split /\./,$host,-1; pop @parts if @parts>1 && $parts[-1] eq '';
+    my $last=$parts[-1]; return $host if $last !~ /\A[0-9]+\z/ && _ipv4_number($last)<0;
+    _host_fail() if @parts>4;
+    my @numbers=map {_ipv4_number($_)} @parts;
+    _host_fail() if grep {$_<0 || $_>4294967295} @numbers;
+    for my $i (0..$#numbers-1) { _host_fail() if $numbers[$i]>255; }
+    _host_fail() if $numbers[-1] >= 2**(8*(5-@numbers));
+    my $address=$numbers[-1];
+    for my $i (0..$#numbers-1) { $address += $numbers[$i] << (8*(3-$i)); }
+    return join('.',map {($address >> $_)&255} (24,16,8,0));
+}
+sub _ipv6_groups {
+    my ($s)=@_; return () if $s eq ''; my @groups;
+    for my $part (split /:/,$s,-1) {
+        if (index($part,'.')>=0) { my @b=split /\./,$part; push @groups,($b[0]<<8)|$b[1],($b[2]<<8)|$b[3]; }
+        else { push @groups,hex($part); }
+    }
+    return @groups;
+}
+sub _normalize_ipv6 {
+    my ($s)=@_; my @sides=split /::/,$s,-1; my @groups=_ipv6_groups($sides[0]);
+    if (@sides==2) { my @right=_ipv6_groups($sides[1]); push @groups,(0)x(8-@groups-@right),@right; }
+    my ($best,$size,$at)=(-1,1,0);
+    while ($at<8) {
+        if ($groups[$at]!=0) { ++$at; next; }
+        my $start=$at; ++$at while $at<8 && $groups[$at]==0;
+        ($best,$size)=($start,$at-$start) if $at-$start>$size;
+    }
+    my @hex=map {sprintf('%x',$_)} @groups;
+    return join(':',@hex) if $best<0;
+    return join(':',@hex[0..$best-1]).'::'.join(':',@hex[$best+$size..7]);
+}
+sub _userinfo_encode {
+    my ($s)=@_; my $bytes=Encode::encode('UTF-8',$s,Encode::FB_CROAK() | Encode::LEAVE_SRC());
+    $bytes =~ s/([\x00-\x20\x7f-\xff"#\/:;<=>?@\[\\\]^`{|}])/sprintf('%%%02X',ord($1))/ge;
+    return $bytes;
+}
 sub _authority {
-    my ($s,$scheme)=@_; _host_fail() if length($s)<1 || length($s)>1024 || $s =~ /[^\x00-\x7f]|[@%]/;
+    my ($s,$scheme)=@_; _host_fail() if length($s)<1 || length($s)>1024;
+    my $userinfo=''; my $at_sign=rindex($s,'@');
+    if ($at_sign>=0) {
+        my $raw=substr($s,0,$at_sign); _decode($raw); # Validate, never re-decode credential bytes.
+        my $colon=index($raw,':');
+        my $username=_userinfo_encode($colon<0?$raw:substr($raw,0,$colon));
+        my $password=$colon<0?'':_userinfo_encode(substr($raw,$colon+1));
+        $userinfo=$username.($password ne ''?':'.$password:'').'@' if $username ne '' || $password ne '';
+        $s=substr($s,$at_sign+1);
+    }
     my ($host,$port);
     if (substr($s,0,1) eq '[') {
         my $close=index($s,']'); _host_fail() if $close<0;
-        my $address=substr($s,1,$close-1); _host_fail() if !_ipv6($address); $host='['.lc($address).']';
+        my $address=substr($s,1,$close-1); _host_fail() if !_ipv6($address); $host='['._normalize_ipv6($address).']';
         my $tail=substr($s,$close+1);
         if (length($tail)) { _host_fail() if substr($tail,0,1) ne ':'; $port=substr($tail,1); }
     } else {
-        my $at=index($s,':'); $host=lc($at<0?$s:substr($s,0,$at)); $port=substr($s,$at+1) if $at>=0;
-        my $dns=$host; $dns =~ s/\.$//; _host_fail() if length($dns)<1 || length($dns)>253;
-        my @labels=split /\./,$dns,-1;
-        for my $label (@labels) { _host_fail() if length($label)>63 || $label !~ /\A[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z/; }
-        my $tail=$labels[-1]; _host_fail() if ($tail =~ /\A[0-9]+\z|\A0x[0-9a-f]*\z/) && !_ipv4($host);
+        my $at=index($s,':'); $host=_decode($at<0?$s:substr($s,0,$at)); $port=substr($s,$at+1) if $at>=0;
+        # URL reg-names are not restricted to DNS labels. Full UTS46 is not
+        # supplied by Perl core; do not implement an incomplete IDNA substitute.
+        _host_fail() if $host eq '' || $host =~ /[\x00-\x20\x7f-\x{10ffff}#%\/:<>?@\[\\\]^|]/;
+        $host=_normalize_ipv4_host(lc($host));
     }
-    if (defined($port)) {
-        _fail('GS1 port must contain decimal digits from 0 to 65535','GS1_DIGITAL_LINK_INVALID_URI') if $port !~ /\A[0-9]{1,5}\z/;
-        my $n=0+$port; _fail('GS1 port must be from 0 to 65535','GS1_DIGITAL_LINK_INVALID_URI') if $n>65535;
+    if (defined($port) && $port ne '') {
+        _fail('GS1 port must contain decimal digits from 0 to 65535','GS1_DIGITAL_LINK_INVALID_URI') if $port !~ /\A[0-9]+\z/;
+        my $n=0;
+        for my $digit (split //,$port) {
+            $n=$n*10+ord($digit)-48;
+            _fail('GS1 port must be from 0 to 65535','GS1_DIGITAL_LINK_INVALID_URI') if $n>65535;
+        }
         $host.=':'.$n if !(($scheme eq 'http' && $n==80)||($scheme eq 'https' && $n==443));
     }
-    return $host;
+    return $userinfo.$host;
 }
 sub _url {
     my $s=_text($_[0],'GS1 Digital Link URI');
-    _fail('GS1 Digital Link URI must not include a fragment','GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED') if index($s,'#')>=0;
-    _fail('GS1 URI must be absolute http or https without whitespace or backslashes','GS1_DIGITAL_LINK_INVALID_URI') if $s =~ /[\x00-\x20\x7f\\]/;
-    _fail('GS1 URI must be an absolute http or https URL','GS1_DIGITAL_LINK_INVALID_URI') if $s !~ /\A([Hh][Tt][Tt][Pp][Ss]?):\/\/([^\/?]*)([^?]*)(?:\?(.*))?\z/s;
-    my ($scheme,$authority,$path,$query)=(lc($1),$2,$3,$4); $authority=_authority($authority,$scheme);
+    _percent_fail() if index($s,"\x00")>=0;
+    $s =~ s/\A[\x00-\x20]+|[\x00-\x20]+\z//g; $s =~ tr/\t\n\r//d;
+    my $fragment=index($s,'#'); my $empty_fragment=$fragment>=0;
+    if ($fragment>=0) {
+        _fail('GS1 Digital Link URI must not include a fragment','GS1_DIGITAL_LINK_FRAGMENT_NOT_ALLOWED') if $fragment!=length($s)-1;
+        $s=substr($s,0,$fragment);
+    }
+    my $query_at=index($s,'?'); my $head=$query_at<0?$s:substr($s,0,$query_at); my $query=$query_at<0?undef:substr($s,$query_at+1);
+    $head =~ tr{\\}{/}; # Query backslashes remain literal payload data.
+    _fail('GS1 URI must be an absolute http or https URL','GS1_DIGITAL_LINK_INVALID_URI') if $head !~ /\A([Hh][Tt][Tt][Pp][Ss]?):\/*([^\/]*)(.*)\z/s;
+    my ($scheme,$authority,$path)=(lc($1),$2,$3); $authority=_authority($authority,$scheme);
+    # WHATWG path serialization, without erasing GS1 dot segments.
+    $path=Encode::encode('UTF-8',$path,Encode::FB_CROAK() | Encode::LEAVE_SRC());
+    $path =~ s/([\x00-\x20\x7f-\xff"#<>?^`{}])/sprintf('%%%02X',ord($1))/ge;
     _decode($_) for @{_split($path,'/',2*GS1_MAX_ELEMENTS+1)};
     _pair($_) for defined($query) ? @{_split($query,'&',GS1_MAX_ELEMENTS)} : ();
-    return {scheme=>$scheme,authority=>$authority,path=>$path,query=>$query};
+    return {scheme=>$scheme,authority=>$authority,path=>$path,query=>$query,emptyFragment=>$empty_fragment};
 }
 sub _url_base { $_[0]{scheme}.'://'.$_[0]{authority} }
 sub _check_primary {
@@ -468,7 +542,7 @@ sub create_gs1_digital_link { _untied_args(@_);
     my ($elements,$options)=@_; my $o=_options($options,qw(baseUrl primaryAi pathAis explicitPathAis));
     my $primary=_check_primary(exists($o->{primaryAi})?$o->{primaryAi}:'01');
     my $base=_url(exists($o->{baseUrl})?$o->{baseUrl}:'https://id.gs1.org');
-    _fail('GS1 Digital Link baseUrl must not include query components') if defined $base->{query};
+    _fail('GS1 Digital Link baseUrl must not include query components') if defined($base->{query}) && $base->{query} ne '';
     my $ais=exists($o->{pathAis})?_array($o->{pathAis},'GS1 pathAis'):[];
     _fail('GS1 element count exceeds limit') if @$ais>GS1_MAX_ELEMENTS;
     my $explicit=exists($o->{pathAis}) ? 1 : 0;
@@ -496,6 +570,7 @@ sub create_gs1_digital_link { _untied_args(@_);
     my $out=_url_base($base).$stem;
     $out.='/'. _encode($_->{ai}).'/'. _encode($_->{value}) for @path;
     $out.='?'.join('&',map {_encode($_->{ai},1).'='._encode($_->{value},1)} @query) if @query;
+    $out.='#' if $base->{emptyFragment};
     return _text($out,'GS1 Digital Link output');
 }
 sub _parse_link {

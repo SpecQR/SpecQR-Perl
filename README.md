@@ -70,7 +70,7 @@ specqr --text-file long.txt --version 2 --structured-append --format json
 - [GS1 / Digital Link の対応範囲](docs/gs1.md)
 - [検証とリリース手順](docs/verification.md)
 
-GS1 の URL 処理は明記した厳密なプロファイルです。一般的なブラウザの URL 補正をすべて再現するものではありません。受け入れ範囲と差分は GS1 ガイドを参照してください。
+GS1 Digital Link では通常の QR 生成との互換性を保ち、空フラグメント、HTTP(S) スラッシュ補正、ASCII ホスト、認証情報の構文、数値 IPv4 別名、IPv6 正規化などの受け入れ範囲を拡張しました。不正な percent encoding・UTF-8・NUL と GS1 データを消すドットパスは引き続き拒否します。Unicode ホストの IDNA 変換は対象外です。正確な対応範囲と検証結果は [GS1 ガイド](docs/gs1.md) を参照してください。
 
 ## ライセンス
 
