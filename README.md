@@ -1,8 +1,10 @@
 # SpecQR Perl
 
+A native, dependency-free QR Code Model 2 encoder for Perl.
+
 Perl だけで動く QR コード生成ライブラリです。QR のビット列、GF(256)、Reed–Solomon、マスク評価、SVG、PNG をこのリポジトリで実装しています。実行時の CPAN パッケージ、外部 QR エンコーダ、FFI、JavaScript ランタイムは不要です。
 
-- QR Model 2、バージョン 1–40、誤り訂正 L/M/Q/H、全 8 マスクと自動選択
+- QR Code Model 2、バージョン 1–40、誤り訂正 L/M/Q/H、全 8 マスクと自動選択
 - 数字・英数字・バイト・漢字モード、混在セグメント最適化、ECI、FNC1 第一／第二位置
 - 容量照会、行列を作らない事前計画、マスク・印刷・読み取りリスク診断
 - GS1 要素文字列、チェックディジット、50 個の対応 AI、Digital Link
@@ -66,7 +68,7 @@ specqr --text-file long.txt --version 2 --structured-append --format json
 ## ドキュメント
 
 - [日本語 Getting Started](docs/getting-started.md)
-- [English API reference](docs/reference.md)
+- [API リファレンス](docs/reference.md)
 - [GS1 / Digital Link の対応範囲](docs/gs1.md)
 - [検証とリリース手順](docs/verification.md)
 

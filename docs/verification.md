@@ -1,52 +1,52 @@
 # 検証とリリース手順 / Verification
 
-This edition does not treat self-generated fixtures, a decoder's partial output, or a process that later fails as successful independent verification.
+この版では、自ら生成した fixture、decoder の部分的な出力、後から失敗する process を、独立検証の成功として扱いません。
 
 ## Reproducible runtime profile
 
-- Perl floor: 5.42.3; current stable: 5.44.0.
-- Official source archives and SHA-256 values are pinned in `script/install_perl.py`.
-- The profile is Linux x86-64. No unexecuted macOS/Windows lane is claimed.
-- Runtime dependencies: only Perl core modules. Python, Node, Nayuki, ZXing-C++, ZXing Java, and image tooling are development-only verification assets.
+- Perl の最小版: 5.42.3。この検証 profile の現行安定版: 5.44.0。
+- 公式 source archive と SHA-256 は `script/install_perl.py` に固定しています。
+- profile は Linux x86-64 です。実行していない macOS/Windows lane の成功は主張しません。
+- 実行時の依存関係は Perl core module だけです。Python、Node、Nayuki、ZXing-C++、ZXing Java、画像用 tool は開発専用の検証資産です。
 
-Official references: [CPAN source distribution](https://www.cpan.org/src/), [Perl support policy](https://perldoc.perl.org/perlpolicy).
+公式参照: [CPAN source distribution](https://www.cpan.org/src/)、[Perl support policy](https://perldoc.perl.org/perlpolicy)。
 
 ## Baselines and independent checks
 
-The immediate source baselines are [SpecQR TS 16efc6c](https://github.com/SpecQR/SpecQR/commit/16efc6c0a8e397c9df3d051d20fce6c1eebdfad7) and [SpecQR Nim 4f91546](https://github.com/SpecQR/SpecQR-Nim/commit/4f9154664d35a24cecb30b75cfdba0a9f16ced3e). The Perl runtime is native implementation code, not a subprocess adapter to those editions.
+直接の source baseline は [SpecQR TS 16efc6c](https://github.com/SpecQR/SpecQR/commit/16efc6c0a8e397c9df3d051d20fce6c1eebdfad7) と [SpecQR Nim 4f91546](https://github.com/SpecQR/SpecQR-Nim/commit/4f9154664d35a24cecb30b75cfdba0a9f16ced3e) です。Perl runtime は native 実装のコードであり、それらの版を子 process として呼び出す adapter ではありません。
 
-Required gates:
+必須の gate:
 
-1. Native tests for core arithmetic, capacities, Unicode, segments, optimizer, GS1, SA, and rendering under both exact runtimes.
-2. Pinned public reference corpus: 5,610 records including generation, planning, capacity boundaries, and SA. Corpus bytes remain unchanged; exactly eight outdated high-level FNC1 percent expectations are replaced by an explicit overlay from the exact current TypeScript baseline. All other 5,602 public expectations remain unchanged, with no skipped records.
-3. Unchanged pinned internal reference corpus: 4,576 records including all 65,536 GF products, Reed–Solomon cases, version/ECC/mask raw matrices, data and ECC codewords. Independent Nayuki-backed cases are identified in the corpus, not inferred from matching a related port.
-4. The unchanged 1,411 GS1 historical requests against request-bound current TypeScript expectations: 80 restored positive targets, 168 exact residual contracts and five independently witnessed diagnostic migrations. All 49 shared authority/Digital Link operations and 139 extra current-TypeScript positives run. Original strict-authority inputs are retained with explicit assertion mapping; unsafe dot-path rejection remains required.
-5. All 102 shared current FNC1/GS1/DPI/ECC regression records. Current TS safe percent escaping is tested rather than inheriting Nim's earlier byte-only fallback limitation.
-6. Strict malformed-input and resource-boundary tests; independent optimizer checks; CLI Unicode, raw-byte, file and stdin/stdout behavior.
-7. Independent C++ decoder tests against default scale-8 PNGs, verifying exact payload and SA metadata. PNG framing, checksums, RGBA dimensions, all pixels, and quiet zone are checked independently.
-8. A separate Java strict-PNG lane. A detector `NotFound` is recorded as a detector limitation/failure, never relabeled successful decoding. The diagnostic lane does not replace the C++ required decode gate.
-9. Fresh offline Makefile.PL installation into an isolated prefix and consumer process outside the source tree; installed library bytes must match the candidate.
-10. Independent source review, sanitized publication inventory, exact public-commit CI, and a fresh public-source consumer.
+1. 正確な両 runtime で、core の算術、容量、Unicode、segment、optimizer、GS1、SA、描画の native test を実行します。
+2. 固定した公開参照 corpus は、生成、計画、容量境界、SA を含む 5,610 レコードです。corpus のバイトは維持し、古くなった高レベル FNC1 percent の期待値ちょうど 8 件だけを、正確な current TypeScript baseline に由来する明示的な overlay で置き換えます。他の 5,602 件の公開期待値は変更せず、レコードを skip しません。
+3. 固定した内部参照 corpus の 4,576 レコードは変更しません。全 65,536 GF 積、Reed–Solomon case、version/ECC/mask の raw matrix、data と ECC の codeword を含みます。独立した Nayuki に基づく case は corpus 内で明示し、関連する他言語版との一致から推測しません。
+4. 元の GS1 履歴 request 1,411 件を変更せず、request に結び付いた current TypeScript の期待値と照合します。復元した positive target 80 件、正確な residual contract 168 件、独立に確認した診断移行 5 件を含みます。共有する authority/Digital Link の全 49 操作と、追加の current TypeScript positive 139 件を実行します。元の strict-authority 入力を明示的な assertion mapping とともに保持し、安全でない dot-path の拒否を引き続き必須にします。
+5. 共有する current FNC1/GS1/DPI/ECC 回帰レコード 102 件をすべて実行します。Nim の以前の byte-only fallback 制限を引き継がず、current TS の安全な percent escaping を検証します。
+6. 不正入力と資源境界の厳密なテスト、独立した optimizer 検査、CLI の Unicode・raw-byte・file・stdin/stdout の挙動を確認します。
+7. 既定 scale 8 の PNG に対する独立 C++ decoder テストで、正確な payload と SA metadata を検証します。PNG framing、checksum、RGBA dimensions、全 pixel、quiet zone は独立に検査します。
+8. Java の strict-PNG lane は別に実行します。detector の `NotFound` は detector の制限・失敗として記録し、復号成功に読み替えません。診断 lane は C++ の必須 decode gate を置き換えません。
+9. 新しい offline の Makefile.PL インストールを、分離した prefix に行い、source tree 外の consumer process を使います。インストールしたライブラリのバイトは候補と一致する必要があります。
+10. 独立した source review、公開向けに不要・非公開情報を除いた file inventory、正確な公開 commit に対する CI、新しい公開 source consumer を確認します。
 
 ## Harness integrity
 
-The harness checks final exit status, response cardinality, JSON types, stderr policy, and absence of trailing output. It records input/output/source SHA-256 bindings and rejects source changes during a run. Negative controls include a valid prefix followed by exit failure, unwanted stderr, additional output, invalid/duplicate-key JSON, timeouts, and mismatched image framing. A test process still running is not a pass.
+harness は、最終 exit status、response 数、JSON 型、stderr 方針、末尾の余分な出力がないことを検査します。input/output/source の SHA-256 による結び付きを記録し、実行中の source 変更を拒否します。negative control は、有効な先頭部分に続く異常終了、不要な stderr、追加出力、不正または重複キーのある JSON、timeout、画像 framing の不一致を含みます。まだ動作中の test process は成功ではありません。
 
-Generation tests that compare reference vectors are distinguished from independent decoder checks. A portability statement describes implementation design; only actual recorded platform/runtime runs support verified-platform claims.
+参照 vector と比較する生成テストと、独立した decoder 検査を区別します。移植性の説明は実装設計を述べるものです。検証済み platform と主張する根拠になるのは、実際に記録した platform/runtime の実行だけです。
 
 ## Running
 
-Basic installed-package tests require only core Perl modules:
+基本的なインストール済み package のテストに必要なのは Perl core module だけです。
 
 ```sh
 perl Makefile.PL
 make test
 ```
 
-Full source-bound verification uses `script/verify_native.py`, the checked-in fixture manifest, and the pinned tooling installer. See each script's `--help` for required paths. Development dependencies are isolated from package installation. CI runs the same required checks against its immutable checkout and uploads terminal evidence.
+source に結び付いた完全な検証には、`script/verify_native.py`、リポジトリ内の fixture manifest、固定した tooling installer を使います。必要な path は各 script の `--help` を参照してください。開発用の依存関係は package のインストールから分離しています。CI は変更しない checkout に対して同じ必須検査を実行し、完了時の証拠を upload します。
 
 ## Publication boundary
 
-A new public GitHub repository is created only after review of the exact candidate and file inventory. Build trees, interpreter archives, caches, local account information, and private working files are not published. Publication is a source release only: no CPAN upload, registry publication, tag, or unrelated repository edit is included. Completion requires exact-commit hosted CI and the fresh public consumer to pass.
+新しい公開 GitHub repository は、正確な候補と file inventory のレビュー後にだけ作成します。build tree、interpreter archive、cache、ローカルアカウント情報、非公開の作業ファイルは公開しません。公開対象は source release だけであり、CPAN upload、registry 公開、tag、無関係な repository の編集は含みません。完了には、正確な commit に対する hosted CI と、新しい公開 consumer の成功が必要です。
 
-Terminal evidence is kept with the deliverable separately from runtime files. Claims and counts must come from completed receipts for the reviewed source hashes, not earlier development passes.
+完了時の証拠は成果物とともに、runtime ファイルとは別に保存します。主張と件数は、レビューした source hash に対して完了した receipt に基づく必要があり、以前の開発時の成功から流用してはいけません。
