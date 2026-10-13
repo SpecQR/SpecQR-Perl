@@ -1,8 +1,6 @@
 # GS1 and GS1 Digital Link
 
-`SpecQR::GS1` implements the entire bounded 50-AI SpecQR catalog with native
-Perl and core modules. It performs no network access, DNS resolution, or
-subprocess execution. Import individual helpers or `:all`:
+`SpecQR::GS1` は、50 AI に限定した SpecQR カタログ全体を native Perl と core module で実装します。ネットワークアクセス、DNS 解決、子 process の実行は行いません。個別の helper または `:all` を import してください。
 
 ```perl
 use SpecQR::GS1 qw(:all);
@@ -22,76 +20,43 @@ my $parsed = parse_gs1_digital_link($uri);
 
 ## Inputs and return values
 
-The supported runtime floor is Perl 5.42.3. Strings must be actual Perl string scalars,
-not numbers, `undef`, objects, references, or coerced JSON booleans. Quote
-AIs and numeric values to preserve leading zeroes. ASCII strings work with or
-without Perl's Unicode flag. Non-ASCII text must be a Unicode character string,
-not an unflagged UTF-8 byte buffer. Decode external bytes explicitly using
-`Encode::decode('UTF-8', $bytes, Encode::FB_CROAK)` first. Invalid internal UTF-8,
-surrogates, and code points above U+10FFFF are rejected.
+対応する最小 runtime は Perl 5.42.3 です。文字列には実際の Perl 文字列 scalar が必要で、数値、`undef`、object、reference、型変換された JSON boolean は使えません。先頭のゼロを保持するため、AI と数値を表す値は引用符で囲んでください。ASCII 文字列は Perl の Unicode flag の有無を問いません。非 ASCII テキストは Unicode 文字列である必要があり、flag のない UTF-8 byte buffer は使えません。外部の bytes は、先に `Encode::decode('UTF-8', $bytes, Encode::FB_CROAK)` で明示的に decode してください。不正な内部 UTF-8、surrogate、U+10FFFF を超える code point は拒否します。
 
-Elements are unblessed, untied arrayrefs of unblessed, untied hashrefs containing
-`ai` and `value`. Options are an optional hashref with camelCase keys. Unknown
-option keys are rejected. Boolean options accept numeric `0`/`1` or
-`JSON::PP` booleans, not strings. Omitted or `undef` options use defaults.
-Tied argument scalars, array entries, and hash fields are rejected before
-fetching them. Forged JSON boolean objects with an invalid underlying type or
-value are rejected. Result hashes and metadata use camelCase keys, matching
-SpecQR's other ports. Returned JSON booleans are independently owned
-`JSON::PP::Boolean` scalar objects; changing one cannot alter the internal
-catalog or a subsequent result.
+要素は、bless も tie もされていない hashref を格納する、bless も tie もされていない arrayref です。各 hashref は `ai` と `value` を持ちます。options は省略可能な hashref で、キーは camelCase です。未知の option key は拒否します。boolean option は数値の `0`/`1` または `JSON::PP` の boolean を受け入れ、文字列は受け入れません。options を省略するか `undef` にすると既定値を使います。
+引数の scalar、array の要素、hash の field が tie されている場合、値を取得する前に拒否します。内部の型や値が不正な偽装 JSON boolean object も拒否します。結果の hash と metadata は、SpecQR の他言語版に合わせて camelCase のキーを使います。返される JSON boolean は、それぞれ独立に所有する `JSON::PP::Boolean` scalar object です。一つを変更しても、内部カタログや後続の結果は変わりません。
 
-`normalize_gs1_elements($input)` accepts an element array, a parse-result hash
-with `elements`, or a string. Strings starting with `(` use human-readable
-parsing; other strings use raw element-string parsing. All normalized elements
-are fresh hashes. Catalog metadata is copied, including nested fields, so callers
-cannot mutate the internal catalog.
+`normalize_gs1_elements($input)` は、要素の配列、`elements` を持つ解析結果の hash、または文字列を受け入れます。`(` で始まる文字列には human-readable 解析を、それ以外の文字列には raw element-string 解析を使います。正規化した要素はすべて新しい hash です。カタログの metadata はネストした field も含めてコピーするため、呼出側は内部カタログを変更できません。
 
 ## Catalog and field validation
 
-`get_supported_gs1_ais()` returns all 50 metadata hashes.
-`get_gs1_ai_info($ai)` returns one metadata hash or `undef` for an unsupported AI.
-Each record has `ai`, `label`, `length`, `valueKind`, `checkDigitRule`,
-`digitalLinkRole`, `separator`, and `digitalLinkPathForPrimary`.
+`get_supported_gs1_ais()` は 50 個すべての metadata hash を返します。
+`get_gs1_ai_info($ai)` は 1 個の metadata hash を返し、未対応の AI なら `undef` を返します。各レコードは `ai`、`label`、`length`、`valueKind`、`checkDigitRule`、`digitalLinkRole`、`separator`、`digitalLinkPathForPrimary` を持ちます。
 
-- Fixed length: `{ type => 'fixed', exact => N, isVariable => false }`
-- Variable length: `{ type => 'variable', min => 1, max => N, isVariable => true }`
-- `digitalLinkPathForPrimary` is `['01']` for qualifiers and otherwise `undef`
+- 固定長: `{ type => 'fixed', exact => N, isVariable => false }`
+- 可変長: `{ type => 'variable', min => 1, max => N, isVariable => true }`
+- `digitalLinkPathForPrimary` は qualifier では `['01']`、それ以外では `undef` です。
 
-Supported AIs:
+対応する AI:
 
 - `00`, `01`, `02`, `10`, `11`, `12`, `13`, `15`, `16`, `17`, `20`, `21`, `22`, `30`, `37`
 - `240`, `241`, `400`, `410`–`415`, `420`, `422`, `424`, `425`, `426`
 - `3100`–`3105`, `3200`–`3205`, `91`–`99`
 
-Checks cover fixed/variable lengths, numeric versus printable ASCII values,
-GTIN/SSCC check digits, raw parentheses, and U+001D/FNC1 separators. All element
-values must use printable ASCII. `%` is literal data here, not a placeholder for
-FNC1. The QR encoding layer performs its own lossless FNC1 representation.
+検査対象は、固定長・可変長、数値と printable ASCII の値の区別、GTIN/SSCC チェックディジット、raw の括弧、U+001D/FNC1 separator です。要素の値はすべて printable ASCII を使う必要があります。ここで `%` はデータそのものであり、FNC1 の代用記号ではありません。QR 符号化層は、独自にデータを失わない FNC1 表現へ変換します。
 
-This is not comprehensive GS1 certification. Date AIs require six digits, not a
-valid calendar date. GLN AIs `410`–`415` require 13 digits, consistent with this
-shared catalog; GLN check digits and every GS1 AI combination rule are not checked.
-Unsupported AIs cannot be silently enabled.
+これは包括的な GS1 認証ではありません。日付 AI は 6 桁を要求しますが、暦上の有効な日付かどうかは確認しません。GLN AI `410`–`415` は、この共通カタログに合わせて 13 桁を要求します。GLN チェックディジットや、すべての GS1 AI 組合せ規則は検査しません。未対応の AI を黙って有効にはできません。
 
 ## Element strings
 
-- `parse_gs1_human_readable($string)` returns an element array
-- `parse_gs1_element_string($string)` returns `{ elements, hasSeparators }`
-- `create_gs1_element_string($elements)` inserts U+001D after each nonfinal variable field
-- `gs1_to_human_readable($elements)` adds AI parentheses
-- `gs1_element_string_to_human_readable($raw)` parses and formats raw data
+- `parse_gs1_human_readable($string)` は要素の配列を返します。
+- `parse_gs1_element_string($string)` は `{ elements, hasSeparators }` を返します。
+- `create_gs1_element_string($elements)` は末尾以外の各可変長 field の後に U+001D を挿入します。
+- `gs1_to_human_readable($elements)` は AI の括弧を追加します。
+- `gs1_element_string_to_human_readable($raw)` は raw data を解析して整形します。
 
-A nonfinal variable field must be separated. The parser uses SpecQR's
-conservative ambiguity check: an apparent complete fixed-length AI suffix in
-an unseparated final variable value is rejected as a missing separator, even if
-the supposed suffix's data would fail its own numeric validation. This can reject
-some otherwise printable terminal lot values; use a structured element array or
-human-readable input when generating such values. Do not assume that every
-possible raw variable field has an unambiguous parse.
+末尾以外の可変長 field には区切りが必要です。parser は SpecQR の保守的な曖昧性検査を使います。区切りのない末尾の可変長値に、完全な固定長 AI に見える suffix がある場合、その suffix のデータ自体が数値検証に失敗する場合でも、separator の欠落として拒否します。このため、通常なら printable な末尾の lot 値の一部も拒否されます。そのような値を生成するときは、構造化した要素配列か human-readable 入力を使ってください。あらゆる raw 可変長 field が一意に解析できるとは限りません。
 
-Aliases: `gs1_normalize`, `gs1_from_human_readable`, `gs1_to_element_string`,
-`gs1_build`, `gs1_parse`.
+別名: `gs1_normalize`、`gs1_from_human_readable`、`gs1_to_element_string`、`gs1_build`、`gs1_parse`。
 
 ## Check digits
 
@@ -99,28 +64,20 @@ Aliases: `gs1_normalize`, `gs1_from_human_readable`, `gs1_to_element_string`,
 - `calculate_gtin_check_digit`, `append_gtin_check_digit`, `validate_gtin_check_digit`
 - `calculate_sscc_check_digit`, `append_sscc_check_digit`, `validate_sscc_check_digit`
 
-Calculation accepts the body without its check digit; validation accepts the
-complete value. GTIN bodies have 7, 11, 12, or 13 digits; SSCC bodies have 17.
-Malformed input throws. A correctly shaped number with a wrong check digit
-returns false. The calculation uses GS1 modulo-10 with right-to-left weights 3, 1.
+計算関数はチェックディジットを除いた本体を受け取り、検証関数は完全な値を受け取ります。GTIN の本体は 7、11、12、13 桁、SSCC の本体は 17 桁です。不正な形式の入力では例外を送出します。形式が正しくチェックディジットだけが誤っている数値は false を返します。計算は GS1 modulo-10 を使い、右から左へ 3、1 の重みを適用します。
 
 ## Digital Link API
 
-`create_gs1_digital_link($elements, \%options)` supports:
+`create_gs1_digital_link($elements, \%options)` は次に対応します。
 
-- `baseUrl`: defaults to `https://id.gs1.org`
-- `primaryAi`: defaults to `'01'`; `'00'` and `'414'` are also supported
-- `pathAis`: selected qualifier AIs; an explicit empty array puts all qualifiers in query
-- `explicitPathAis`: numeric/JSON boolean; true uses an explicit selection even when `pathAis` is omitted
+- `baseUrl`: 既定値は `https://id.gs1.org`
+- `primaryAi`: 既定値は `'01'`。`'00'` と `'414'` にも対応
+- `pathAis`: 選択した qualifier AI。明示的な空配列では、すべての qualifier を query に配置
+- `explicitPathAis`: 数値または JSON boolean。true では、`pathAis` を省略しても明示的な選択として扱う
 
-For primary `01`, qualifiers `10`, `21`, `22` enter the path by default. Other
-values enter a query sorted lexicographically by AI and then value. Qualifier
-path order follows input order. A `pathAis` selection may include the primary AI;
-it does not change its position. Invalid path selections and duplicate AIs are
-rejected. Dot-only qualifier values are always routed into query, even when
-selected for the path. `gs1_digital_link` and `gs1_to_digital_link` are aliases.
+primary が `01` の場合、既定では qualifier の `10`、`21`、`22` を path に配置します。それ以外の値は、AI、次に値の順で辞書順に並べた query に配置します。qualifier の path 内の順序は入力順に従います。`pathAis` の選択に primary AI を含めることもできますが、その位置は変わりません。不正な path 選択と重複する AI は拒否します。dot-only の qualifier 値は、path 向けに選択されていても必ず query に配置します。`gs1_digital_link` と `gs1_to_digital_link` は別名です。
 
-`parse_gs1_digital_link($uri, \%options)` returns:
+`parse_gs1_digital_link($uri, \%options)` は次の値を返します。
 
 ```perl
 {
@@ -132,19 +89,9 @@ selected for the path. `gs1_digital_link` and `gs1_to_digital_link` are aliases.
 }
 ```
 
-Options are `primaryAi` (default: discover the first literal `00`, `01`, or `414`
-path segment) and `unknownQuery` (`'preserve'` or `'reject'`; default: preserve).
-Unknown query duplicates and their order are retained. A numeric 2–4-character
-query key is treated as an AI and must be supported; it is never silently reclassified
-as unknown. An encoded primary-AI path segment is not used for discovery.
+options は `primaryAi`（既定では最初のリテラルの `00`、`01`、`414` の path segment を探索）と、`unknownQuery`（`'preserve'` または `'reject'`。既定は preserve）です。未知の query の重複と順序を保持します。数字で構成された 2–4 文字の query key は AI として扱い、対応済みである必要があります。黙って未知の query として再分類することはありません。符号化された primary-AI の path segment は探索に使いません。
 
-`normalize_gs1_digital_link($uri, \%options)` accepts the same options plus
-`mode => 'specqr-deterministic'`, the only supported mode. It rebuilds known
-fields deterministically, chooses default eligible qualifiers for the path,
-sorts known query data, and appends unknown query pairs in their original order.
-It is idempotent in its documented URL profile. IPv6 hex groups use lowercase,
-remove leading zeroes, compress the first longest zero run, and convert embedded
-IPv4 into hex groups.
+`normalize_gs1_digital_link($uri, \%options)` は同じ options に加えて、唯一対応する mode である `mode => 'specqr-deterministic'` を受け入れます。既知の field を決定的に再構築し、既定で適格な qualifier を path に選び、既知の query data を並べ替え、未知の query pair を元の順序で末尾に追加します。文書化した URL profile の範囲で冪等です。IPv6 の hex group は小文字にし、先頭のゼロを除去し、最長のゼロの連続のうち最初のものを圧縮し、埋め込まれた IPv4 を hex group に変換します。
 
 ## 互換性を拡張したオフライン URL プロファイル
 
@@ -178,22 +125,10 @@ ASCII の `xn--` 接頭辞をもつ host も完全な UTS46/ACE 妥当性検証�
 受け入れられますが、current TypeScript はどちらも拒否します。これは元の 1,411 件の
 外側にある既知の相違で、168 件という corpus 内差分の集計には混ぜません。
 
-Every percent escape is checked and decoded as strict scalar UTF-8. Invalid
-escapes, overlong sequences, lone surrogates, values above U+10FFFF, truncated
-sequences and decoded NUL are rejected in paths and queries, including unknown
-query fields. Unknown query Unicode is preserved; query `+` decodes to a space.
-Output uses uppercase percent hex and form encoding for queries.
+すべての percent escape を検査し、厳密な scalar UTF-8 として decode します。不正な escape、overlong sequence、孤立 surrogate、U+10FFFF を超える値、途中で切れた sequence、decode 後の NUL は、未知の query field を含む path と query で拒否します。未知の query の Unicode は保持し、query の `+` は空白へ decode します。出力には大文字の percent hex を使い、query には form encoding を使います。
 
-Path AI/value segments are checked *before* any dot-segment normalization.
-Literal or percent-encoded `.`/`..` path values are rejected. A literal data string
-`%2e` roundtrips as `%252e`. Query values `.` and `..` remain data. Only the
-non-GS1 base/prefix path receives dot-segment cleanup. Existing valid escapes in prefixes are preserved; raw path characters receive
-WHATWG-compatible UTF-8 percent serialization without dot-path data loss. Empty internal path segments are
-rejected during parsing, while leading/trailing slashes are tolerated. The
-builder normalizes empty prefix segments. For example, base `/a//b` becomes
-`/a/b`; current TypeScript preserves the repeated slash. This is an inherited
-builder-only difference outside the original 1,411-case corpus. After prefix cleanup, a base URL may
-not contain literal or encoded primary-AI components.
+path の AI/value segment は、dot-segment 正規化の*前に*検査します。リテラルまたは percent-encoded の `.`/`..` の path 値は拒否します。リテラルのデータ文字列 `%2e` は `%252e` として往復変換します。query 値の `.` と `..` はデータのまま保持します。dot-segment を整理するのは、GS1 データではない base/prefix path だけです。prefix 内の既存の有効な escape は保持します。未符号化の path 文字には、dot-path のデータを失わず、WHATWG と互換性のある UTF-8 percent serialization を適用します。内部の空 path segment は解析時に拒否しますが、先頭・末尾の slash は許容します。
+builder は空の prefix segment を正規化します。たとえば base の `/a//b` は `/a/b` になりますが、current TypeScript は繰り返しの slash を保持します。これは元の 1,411 case の corpus の外にある、既存の builder 固有の差です。prefix の整理後、base URL にリテラルまたは符号化された primary-AI component が含まれていてはいけません。
 
 ## Validation and errors
 
@@ -201,31 +136,19 @@ not contain literal or encoded primary-AI components.
 - `validate_gs1_element_string($raw, \%options)`
 - `validate_gs1_digital_link($uri, \%options)`
 
-Element validation options: `context => 'element-string'` or `'digital-link'`,
-`collectAllErrors => 1` (default), `allowUnsupportedAi => 0` (the only permitted
-value). Raw validation also enforces the requested context. Digital Link
-validation accepts parsing options and `normalize => 0`; use the separate
-normalizer to transform input.
+要素の検証 options は、`context => 'element-string'` または `'digital-link'`、`collectAllErrors => 1`（既定値）、`allowUnsupportedAi => 0`（許可される唯一の値）です。raw の検証でも、指定された context を適用します。Digital Link の検証は解析 options と `normalize => 0` を受け入れます。入力の変換には、別の normalizer を使ってください。
 
-Validators return a hash containing `ok`, `errors`, `warnings`, and either
-`elements`/`hasSeparators` or `result`. Irrelevant result values are `undef`;
-errors are empty on success. Field errors use zero-based `elementIndex` and
-`offset`. `collectAllErrors => 0` stops at the first field error. Global shape,
-type, and resource failures stop validation immediately. HTTP and preserved
-unknown query parameters generate warnings.
+`ok`、`errors`、`warnings` と、`elements`/`hasSeparators` または `result` を含む hash を返します。該当しない結果の値は `undef` で、成功時の errors は空です。field error はゼロ始まりの `elementIndex` と `offset` を使います。`collectAllErrors => 0` は最初の field error で停止します。全体の shape、型、資源の失敗は検証を直ちに停止します。HTTP と、保持した未知の query parameter は警告を発生させます。
 
-Throwing helpers use `SpecQR::Error`, with public `{code}` `'INVALID_GS1'`,
-`{detailCode}` containing the specific `GS1_*` reason, and `{message}`.
-Validation issue `{code}` is the detailed reason. Optional issue fields are
-present as `undef`. English wording is informative, not a compatibility key.
+例外を送出する helper は `SpecQR::Error` を使い、公開 `{code}` は `'INVALID_GS1'`、`{detailCode}` は個別の `GS1_*` reason、本文は `{message}` に格納します。検証 issue の `{code}` は詳細な reason です。任意の issue field も `undef` として存在します。英語の文面は説明用であり、互換性のキーではありません。
 
 ## Resource limits
 
-- `GS1_MAX_INPUT_CHARACTERS`: 1,000,000 UTF-16-equivalent units (an astral scalar counts as two)
+- `GS1_MAX_INPUT_CHARACTERS`: 1,000,000 UTF-16 相当 units（補助平面の scalar は 2 と数える）
 - `GS1_MAX_ELEMENTS`: 16,384
-- Element-array AI/value aggregate: at most 1,000,000 UTF-8 bytes
-- Hash fields: at most 16,384 per input object; oversized string byte buffers reject before Unicode traversal
-- URL components, decoded fields, output size and query-pair aggregate are bounded
+- 要素配列の AI/value 合計: 最大 1,000,000 UTF-8 bytes
+- hash field: 入力 object ごとに最大 16,384。大きすぎる文字列 byte buffer は Unicode の走査前に拒否
+- URL component、decode した field、出力サイズ、query-pair の合計には上限がある
 - `GS1_FNC1_SEPARATOR`: U+001D
 
 ## 検証と意図的な差分

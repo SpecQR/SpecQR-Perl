@@ -1,18 +1,18 @@
 # GS1 URL assertion mapping
 
-The original files `gs1-upstream.json`, `gs1-perl-deltas.json`, `strict-authority-vectors.json`, `cross-port-regressions.json`, and `expected-contract-vectors.json` remain byte-for-byte unchanged. No original request was removed.
+元のファイル `gs1-upstream.json`、`gs1-perl-deltas.json`、`strict-authority-vectors.json`、`cross-port-regressions.json`、`expected-contract-vectors.json` はバイト単位で変更していません。元の request は削除していません。
 
 ## Original 1,411-request corpus
 
-Every case is evaluated in native tests. Historical 252-row evidence stays in place; 80 independently executed current-TypeScript positives and five independently witnessed rejection diagnostics override only their identified case IDs. The strict process gate independently executes all 1,411 again against the complete request-bound current oracle plus 168 residuals.
+すべての case を native test で評価します。履歴の 252 行の証拠は保持します。独立に実行した current TypeScript の positive 80 件と、独立に確認した拒否診断 5 件は、特定した case ID の期待値だけを上書きします。厳密な process gate は、request に結び付いた完全な current oracle と 168 residual に対して、全 1,411 件を再び独立に実行します。
 
 ## Seven historical authority hosts
 
-All three parse/validate/normalize operations remain for each host. `0x`, `0X`, `1.0x`, `0x.`, `1.0X`, `1.2.3.0x` become 18 exact positive assertions. `example.0x` stays three rejections. See `current-ts-gs1-shared49.json` and `native-shared-gs1-deltas3.json`.
+各 host について parse/validate/normalize の 3 操作をすべて残します。`0x`、`0X`、`1.0x`、`0x.`、`1.0X`、`1.2.3.0x` は、18 個の正確な positive assertion になります。`example.0x` は 3 個の拒否のままです。`current-ts-gs1-shared49.json` と `native-shared-gs1-deltas3.json` を参照してください。
 
 ## Former native-test rejections now accepted
 
-These original inputs remain in `url-compatibility-extra.json`, each checked for parse, validate, and exact normalize output from pinned TypeScript:
+これらの元の入力は `url-compatibility-extra.json` に残し、それぞれについて parse、validate、固定した TypeScript の正確な normalize 出力を検査します。
 
 - `legacy-host-0`: "https://0x/01/09506000134352"
 - `legacy-host-1`: "https://0X/01/09506000134352"
@@ -39,16 +39,16 @@ These original inputs remain in `url-compatibility-extra.json`, each checked for
 - `legacy-leading-space`: " https://example.com/01/09506000134352"
 - `legacy-query-space`: "https://example.com/01/09506000134352?x=raw space"
 
-All other existing native assertions remain. The original empty-host spelling `https:///01/09506000134352` remains rejected: slash repair makes `01` the host, then path validation rejects missing primary with `GS1_INVALID_DIGITAL_LINK_PLACEMENT` instead of the old unsupported-host reason. This is a diagnostic migration, not acceptance.
+それ以外の既存 native assertion はすべて残します。元の空 host の表記 `https:///01/09506000134352` は引き続き拒否します。slash の修復により `01` が host となり、その後の path 検証は primary の欠落を、従来の未対応 host の reason ではなく `GS1_INVALID_DIGITAL_LINK_PLACEMENT` として拒否します。これは診断の移行であり、受理への変更ではありません。
 
 ## Additional negative and positive coverage
 
-The 139 extra independent positives include every migration above, credential escaping, IPv4 limits and reg-name distinctions, IPv6 compression ties, empty credentials, and long zero-padded ports. Explicit negatives cover overflow, invalid octal/hex in numeric candidates, encoded authority delimiters, malformed percent/UTF-8/NUL in credentials/host/path/query, invalid IPv6, IDNA limits, and credentials absent from diagnostics. `0xg`, `1.0xg`, and `1.2.3.0xg` are independently verified positive reg-names; `0xg.1` is a rejected IPv4 candidate.
+追加の独立した positive 139 件には、上記のすべての移行、credential escaping、IPv4 の上限と reg-name の区別、IPv6 圧縮候補が同長の場合、空の credentials、多数のゼロを先頭に付けた port を含みます。明示的な negative は、overflow、数値候補内の不正な octal/hex、符号化された authority delimiter、credentials/host/path/query 内の不正な percent/UTF-8/NUL、不正な IPv6、IDNA の制限、diagnostics に credentials が含まれないことを対象にします。`0xg`、`1.0xg`、`1.2.3.0xg` は、独立に確認した positive の reg-name です。`0xg.1` は拒否する IPv4 候補です。
 
-No FNC1 or ordinary QR-core contract changes are part of this batch. The 102 original percent vectors, four manual vectors, 49 shared GS1 operations, matrix/codeword corpus and decoder gates remain required.
+この変更には、FNC1 や通常の QR コアの契約変更を含みません。元の percent vector 102 件、manual vector 4 件、共有 GS1 操作 49 件、matrix/codeword corpus、decoder gate は引き続き必須です。
 
 The additional current-TypeScript caret-prefix targets cover parse/validate/normalize for ASCII and Unicode prefixes and builder base serialization. A fresh 1,813-case deterministic probe identified this normalization gap outside the original corpus; it is fixed only in GS1 URL path serialization.
 
 ## Additional reviewed scope limits outside the original corpus
 
-Full UTS46/ACE validation is absent: malformed ASCII A-labels such as `xn--a` were already accepted by the published baseline, while bare `xn--` is newly accepted with general ASCII reg-names. Current TypeScript rejects these examples. Do not mistake these limits for full WHATWG conformance or add them to the original 168 residual count. Builder base `/a//b` still normalizes to `/a/b`, as in the published baseline; current TypeScript preserves duplicate prefix slashes. Neither observation changes GS1 payload dot-path protection.
+完全な UTS46/ACE 検証はありません。`xn--a` のような不正な ASCII A-label は公開済み baseline でも受け入れており、bare `xn--` は一般的な ASCII reg-name とともに新たに受け入れます。current TypeScript はこれらの例を拒否します。この制限を完全な WHATWG 適合と混同したり、元の 168 residual の件数へ追加したりしないでください。builder の base `/a//b` は公開済み baseline と同様に `/a/b` へ正規化します。current TypeScript は prefix 内の重複する slash を保持します。どちらの観測も、GS1 payload の dot-path 保護を変更するものではありません。
